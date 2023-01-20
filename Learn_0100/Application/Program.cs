@@ -51,9 +51,9 @@
 // **************************************************
 //namespace Application
 //{
-//	internal class Program : object
+//	internal static class Program : object
 //	{
-//		private Program() : base()
+//		static Program()
 //		{
 //		}
 
@@ -70,27 +70,6 @@
 // **************************************************
 // Solution (5)
 // **************************************************
-//namespace Application
-//{
-//	internal static class Program : object
-//	{
-//		static Program()
-//		{
-//		}
-
-//		private static void Main()
-//		{
-//			System.Console.WriteLine(value: "Hello World!");
-//		}
-//	}
-//}
-// **************************************************
-// /Solution (5)
-// **************************************************
-
-// **************************************************
-// Solution (6)
-// **************************************************
 namespace Application;
 
 internal static class Program : object
@@ -105,5 +84,5 @@ internal static class Program : object
 	}
 }
 // **************************************************
-// /Solution (6)
+// /Solution (5)
 // **************************************************

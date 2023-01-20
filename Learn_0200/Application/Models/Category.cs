@@ -23,23 +23,19 @@ public class Category : object
 
 	#region Properties
 
-	#region int Id
+	#region public int Id { get; set; }
 	/// <summary>
 	/// شناسه
 	/// </summary>
 	public int Id { get; set; }
+	#endregion /public int Id { get; set; }
 
-	//public long Id { get; set; }
-
-	//public System.Guid Id { get; set; }
-	#endregion /int Id
-
-	#region string? Name
+	#region public string? Name { get; set; }
 	/// <summary>
 	/// نام
 	/// </summary>
 	public string? Name { get; set; }
-	#endregion /string? Name
+	#endregion /public string? Name { get; set; }
 
-	#endregion Properties
+	#endregion /Properties
 }

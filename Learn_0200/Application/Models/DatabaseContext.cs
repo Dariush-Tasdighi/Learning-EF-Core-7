@@ -29,12 +29,19 @@ public class DatabaseContext :
 		//var connectionString =
 		//	"Server=.;Database=LEARNING_EF_CORE_0200;MultipleActiveResultSets=true;Trusted_Connection=True;";
 
-		// **************************************
-		// *** SQL Server Authentication Mode ***
-		// **************************************
+		// *********************************************************************
+		// *** SQL Server Authentication Mode without TrustServerCertificate ***
+		// *********************************************************************
+
+		//var connectionString =
+		//	"Server=.;Database=LEARNING_EF_CORE_0200;MultipleActiveResultSets=true;User ID=sa;Password=1234512345;";
+
+		// ******************************************************************
+		// *** SQL Server Authentication Mode with TrustServerCertificate ***
+		// ******************************************************************
 
 		var connectionString =
-			"Server=.;Database=LEARNING_EF_CORE_0200;MultipleActiveResultSets=true;User ID=sa;Password=1234512345;";
+			"Server=.;Database=LEARNING_EF_CORE_0200;MultipleActiveResultSets=true;TrustServerCertificate=True;User ID=sa;Password=1234512345;";
 
 		// UseSqlServer() -> using Microsoft.EntityFrameworkCore;
 		optionsBuilder.UseSqlServer
