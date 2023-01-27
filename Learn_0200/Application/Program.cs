@@ -25,40 +25,40 @@
 // **************************************************
 // Solution (1)
 // **************************************************
-//namespace Application;
+namespace Application;
 
-//internal static class Program : object
-//{
-//	static Program()
-//	{
-//	}
+/// <summary>
+/// CRUD:
+/// C -> Create | U -> Update | D -> Delete | R -> Retrieve
+///
+/// Retrieve:
+///		Zero or One
+///		Zero Or Many
+/// </summary>
+internal static class Program : object
+{
+	static Program()
+	{
+	}
 
-//	private static void Main()
-//	{
-//		CreateCategory();
-//	}
+	private static void Main()
+	{
+		CreateCategory();
+	}
 
-//	/// <summary>
-//	/// CRUD:
-//	/// C -> Create | U -> Update | D -> Delete | R -> Retrieve
-//	///
-//	/// Retrieve:
-//	///		Zero or One
-//	///		Zero Or Many
-//	/// </summary>
-//	private static void CreateCategory()
-//	{
-//		Models.DatabaseContext databaseContext = new Models.DatabaseContext();
+	private static void CreateCategory()
+	{
+		Models.DatabaseContext databaseContext = new Models.DatabaseContext();
 
-//		Models.Category category = new Models.Category();
+		Models.Category category = new Models.Category();
 
-//		category.Name = "My Category";
+		category.Name = "My Category";
 
-//		databaseContext.Categories.Add(entity: category);
+		databaseContext.Categories.Add(entity: category);
 
-//		databaseContext.SaveChanges();
-//	}
-//}
+		databaseContext.SaveChanges();
+	}
+}
 // **************************************************
 // /Solution (1)
 // **************************************************
@@ -804,505 +804,505 @@
 // **************************************************
 // Solution (9)
 // **************************************************
-using System.Linq;
-using Microsoft.EntityFrameworkCore;
-
-namespace Application;
-
-internal static class Program : object
-{
-	static Program()
-	{
-	}
-
-	public static async System.Threading.Tasks.Task Main()
-	{
-		await CreateCategoryAsync();
-		await DisplayCategoriesAsync();
-
-		// New
-		await UpdateTheFirstCategoryAsync();
-		await DisplayCategoriesAsync();
-
-		// New
-		await UpdateSomeCategoriesAsync();
-		await DisplayCategoriesAsync();
-
-		// New
-		await DeleteTheFirstCategoryAsync();
-		await DisplayCategoriesAsync();
-
-		// New
-		await DeleteSomeCategoriesAsync();
-		await DisplayCategoriesAsync();
-	}
-
-	private static async System.Threading.Tasks.Task CreateCategoryAsync()
-	{
-		Models.DatabaseContext? databaseContext = null;
-
-		try
-		{
-			databaseContext =
-				new Models.DatabaseContext();
-
-			var category =
-				new Models.Category
-				{
-					Name = "My Category",
-				};
-
-			// **************************************************
-			// **************************************************
-			// **************************************************
-			//databaseContext.Categories.Add(entity: category);
-
-			//await databaseContext.Categories.AddAsync(entity: category);
-			// **************************************************
-
-			// **************************************************
-			//var entityEntry =
-			//	databaseContext.Categories.Add(entity: category);
-
-			//var entityEntry =
-			//	await
-			//	databaseContext.Categories.AddAsync(entity: category);
-			// **************************************************
-
-			// **************************************************
-			// تابع ذیل خروجی ندارد
-			//databaseContext.Categories.AddRange(entities: category);
-
-			// تابع ذیل خروجی ندارد
-			//await databaseContext.Categories.AddRangeAsync(entities: category);
-			// **************************************************
-			// **************************************************
-			// **************************************************
-
-			// **************************************************
-			// **************************************************
-			// **************************************************
-			//databaseContext.Add(entity: category);
-
-			//await databaseContext.AddAsync(entity: category);
-			// **************************************************
-
-			// **************************************************
-			//var entityEntry =
-			//	databaseContext.Add(entity: category);
-
-			// نسبت به شش حالتی که وجود دارد
-			// به شخصه، این حالت را بیشتر می‌پسندم
-			var entityEntry =
-				await
-				databaseContext.AddAsync(entity: category);
-			// **************************************************
-
-			// **************************************************
-			// تابع ذیل خروجی ندارد
-			//databaseContext.AddRange(entities: category);
-
-			// تابع ذیل خروجی ندارد
-			//await databaseContext.AddRangeAsync(entities: category);
-			// **************************************************
-			// **************************************************
-			// **************************************************
-
-			var affectedRows =
-				await
-				databaseContext.SaveChangesAsync();
-		}
-		catch (System.Exception ex)
-		{
-			// Log Error!
-
-			System.Console.WriteLine(value: ex.Message);
-		}
-		finally
-		{
-			if (databaseContext != null)
-			{
-				await databaseContext.DisposeAsync();
-			}
-		}
-	}
-
-	private static async System.Threading.Tasks.Task DisplayCategoriesAsync()
-	{
-		Models.DatabaseContext? databaseContext = null;
-
-		try
-		{
-			databaseContext =
-				new Models.DatabaseContext();
-
-			var categories =
-				await
-				databaseContext.Categories
-				.Where(predicate: current => current.Id <= 100)
-				.OrderBy(keySelector: current => current.Id)
-				.ToListAsync()
-				;
-
-			foreach (var item in categories)
-			{
-				var message =
-					$"{nameof(item.Id)}: {item.Id} - {nameof(item.Name)}: {item.Name}";
-
-				System.Console.WriteLine(value: message);
-			}
-		}
-		catch (System.Exception ex)
-		{
-			// Log Error!
-
-			System.Console.WriteLine(value: ex.Message);
-		}
-		finally
-		{
-			if (databaseContext != null)
-			{
-				await databaseContext.DisposeAsync();
-			}
-		}
-	}
-
-	/// <summary>
-	/// New
-	/// </summary>
-	private static async System.Threading.Tasks.Task UpdateTheFirstCategoryAsync()
-	{
-		Models.DatabaseContext? databaseContext = null;
-
-		try
-		{
-			databaseContext =
-				new Models.DatabaseContext();
-
-			// برمی‌گرداند null ،اگر پیدا نکند
-			// اگر فقط یکی پیدا کند، آن‌را برمی‌گرداند
-			// اگر بیش از یکی پیدا کند، اولین آن‌را برمی‌گرداند
-			//var category =
-			//	databaseContext.Categories
-			//	.FirstOrDefault();
-
-			// New in EF Core
-			//var category =
-			//	await
-			//	databaseContext.Categories
-			//	.FirstOrDefaultAsync();
-
-			// خیلی توصیه نمی‌کنم
-			//var category =
-			//	await
-			//	databaseContext.Categories
-			//	.FirstOrDefaultAsync(predicate: current => current.Id <= 100);
-
-			//var category =
-			//	await
-			//	databaseContext.Categories
-			//	.Where(predicate: current => current.Id <= 100)
-			//	.FirstOrDefaultAsync();
-
-			var category =
-				await
-				databaseContext.Categories
-				.Where(predicate: current => current.Id <= 100)
-				.OrderBy(keySelector: current => current.Id)
-				.FirstOrDefaultAsync();
-
-			if (category == null)
-			{
-				System.Console.WriteLine
-					(value: "There is not any category!");
-
-				return;
-			}
-
-			category.Name =
-				$"{category.Name}_{category.Id}";
-
-			var affectedRows =
-				await
-				databaseContext.SaveChangesAsync();
-
-			// **************************************************
-			// اگر پیدا نکند، خطا تولید می‌کند
-			// اگر فقط یکی پیدا کند، آن‌را برمی‌گرداند
-			// اگر بیش از یکی پیدا کند، اولین آن‌را برمی‌گرداند
-			//var theCategory =
-			//	databaseContext.Categories
-			//	.First();
-
-			// New in EF Core
-			//var theCategory =
-			//	await
-			//	databaseContext.Categories
-			//	.FirstAsync();
-			// **************************************************
-
-			// **************************************************
-			// برمی‌گرداند null ،اگر پیدا نکند
-			// اگر فقط یکی پیدا کند، آن‌را برمی‌گرداند
-			// اگر بیش از یکی پیدا کند، آخرین آن‌را برمی‌گرداند
-			//var theCategory =
-			//	databaseContext.Categories
-			//	.LastOrDefault();
-
-			// New in EF Core
-			//var theCategory =
-			//	await
-			//	databaseContext.Categories
-			//	.LastOrDefaultAsync();
-			// **************************************************
-
-			// **************************************************
-			// اگر پیدا نکند، خطا تولید می‌کند
-			// اگر فقط یکی پیدا کند، آن‌را برمی‌گرداند
-			// اگر بیش از یکی پیدا کند، آخرین آن‌را برمی‌گرداند
-			//var theCategory =
-			//	databaseContext.Categories
-			//	.Last();
-
-			// New in EF Core
-			//var theCategory =
-			//	await
-			//	databaseContext.Categories
-			//	.LastAsync();
-			// **************************************************
-
-			// **************************************************
-			// برمی‌گرداند null ،اگر پیدا نکند
-			// اگر فقط یکی پیدا کند، آن‌را برمی‌گرداند
-			// اگر بیش از یکی پیدا کند، خطا تولید می‌کند
-			//var theCategory =
-			//	databaseContext.Categories
-			//	.SingleOrDefault();
-
-			// New in EF Core
-			//var theCategory =
-			//	await
-			//	databaseContext.Categories
-			//	.SingleOrDefaultAsync();
-			// **************************************************
-
-			// **************************************************
-			// اگر پیدا نکند، خطا تولید می‌کند
-			// اگر فقط یکی پیدا کند، آن‌را برمی‌گرداند
-			// اگر بیش از یکی پیدا کند، خطا تولید می‌کند
-			//var theCategory =
-			//	databaseContext.Categories
-			//	.Single();
-
-			// New in EF Core
-			//var theCategory =
-			//	await
-			//	databaseContext.Categories
-			//	.SingleAsync();
-			// **************************************************
-		}
-		catch (System.Exception ex)
-		{
-			// Log Error!
-
-			System.Console.WriteLine(value: ex.Message);
-		}
-		finally
-		{
-			if (databaseContext != null)
-			{
-				await databaseContext.DisposeAsync();
-			}
-		}
-	}
-
-	/// <summary>
-	/// New
-	/// </summary>
-	private static async System.Threading.Tasks.Task UpdateSomeCategoriesAsync()
-	{
-		Models.DatabaseContext? databaseContext = null;
-
-		try
-		{
-			databaseContext =
-				new Models.DatabaseContext();
-
-			var categories =
-				await
-				databaseContext.Categories
-				.Where(predicate: current => current.Id <= 100)
-				.OrderBy(keySelector: current => current.Id)
-				.ToListAsync();
-
-			foreach (var item in categories)
-			{
-				item.Name =
-					$"{item.Name}_{item.Id}";
-
-				//var affectedRows =
-				//	await
-				//	databaseContext.SaveChangesAsync();
-			}
-
-			var affectedRows =
-				await
-				databaseContext.SaveChangesAsync();
-		}
-		catch (System.Exception ex)
-		{
-			// Log Error!
-
-			System.Console.WriteLine(value: ex.Message);
-		}
-		finally
-		{
-			if (databaseContext != null)
-			{
-				await databaseContext.DisposeAsync();
-			}
-		}
-	}
-
-	/// <summary>
-	/// New
-	/// </summary>
-	private static async System.Threading.Tasks.Task DeleteTheFirstCategoryAsync()
-	{
-		Models.DatabaseContext? databaseContext = null;
-
-		try
-		{
-			databaseContext =
-				new Models.DatabaseContext();
-
-			var category =
-				await
-				databaseContext.Categories
-				.Where(predicate: current => current.Id <= 100)
-				.OrderBy(keySelector: current => current.Id)
-				.FirstOrDefaultAsync();
-
-			if (category == null)
-			{
-				System.Console.WriteLine
-					(value: "There is not any category!");
-
-				return;
-			}
-
-			// **************************************************
-			//databaseContext.Categories.Remove(entity: category);
-
-			//var entityEntry =
-			//	databaseContext.Categories.Remove(entity: category);
-
-			// دقت کنید که تابع ذیل، خروجی ندارد
-			//databaseContext.Categories.RemoveRange(entities: category);
-			// **************************************************
-
-			// **************************************************
-			// New in .NET Core
-			//databaseContext.Remove(entity: category);
-
-			// New in .NET Core
-			var entityEntry =
-				databaseContext.Remove(entity: category);
-
-			// New in .NET Core
-			// دقت کنید که تابع ذیل، خروجی ندارد
-			//databaseContext.RemoveRange(entities: category);
-			// **************************************************
-
-			// **************************************************
-			// ندارند Async دقت کنید که توابع فوق
-			// **************************************************
-
-			var affectedRows =
-				await
-				databaseContext.SaveChangesAsync();
-		}
-		catch (System.Exception ex)
-		{
-			// Log Error!
-
-			System.Console.WriteLine(value: ex.Message);
-		}
-		finally
-		{
-			if (databaseContext != null)
-			{
-				await databaseContext.DisposeAsync();
-			}
-		}
-	}
-
-	/// <summary>
-	/// New
-	/// </summary>
-	private static async System.Threading.Tasks.Task DeleteSomeCategoriesAsync()
-	{
-		Models.DatabaseContext? databaseContext = null;
-
-		try
-		{
-			databaseContext =
-				new Models.DatabaseContext();
-
-			var categories =
-				await
-				databaseContext.Categories
-				.ToListAsync()
-				;
-
-			// **************************************************
-			// **************************************************
-			// **************************************************
-			//foreach (var item in categories)
-			//{
-			//	databaseContext.Remove(entity: item);
-
-			//	//var affectedRows =
-			//	//	await
-			//	//	databaseContext.SaveChangesAsync();
-			//}
-			// **************************************************
-
-			// OR
-
-			// **************************************************
-			//databaseContext.Categories.RemoveRange(entities: categories);
-			// **************************************************
-
-			// OR
-
-			// **************************************************
-			// نسبت به سه حالتی که وجود دارد
-			// به شخصه، این حالت را بیشتر می‌پسندم
-			databaseContext.RemoveRange(entities: categories);
-			// **************************************************
-			// **************************************************
-			// **************************************************
-
-			var affectedRows =
-				await
-				databaseContext.SaveChangesAsync();
-		}
-		catch (System.Exception ex)
-		{
-			// Log Error!
-
-			System.Console.WriteLine(value: ex.Message);
-		}
-		finally
-		{
-			if (databaseContext != null)
-			{
-				await databaseContext.DisposeAsync();
-			}
-		}
-	}
-}
+//using System.Linq;
+//using Microsoft.EntityFrameworkCore;
+
+//namespace Application;
+
+//internal static class Program : object
+//{
+//	static Program()
+//	{
+//	}
+
+//	public static async System.Threading.Tasks.Task Main()
+//	{
+//		await CreateCategoryAsync();
+//		await DisplayCategoriesAsync();
+
+//		// New
+//		await UpdateTheFirstCategoryAsync();
+//		await DisplayCategoriesAsync();
+
+//		// New
+//		await UpdateSomeCategoriesAsync();
+//		await DisplayCategoriesAsync();
+
+//		// New
+//		await DeleteTheFirstCategoryAsync();
+//		await DisplayCategoriesAsync();
+
+//		// New
+//		await DeleteSomeCategoriesAsync();
+//		await DisplayCategoriesAsync();
+//	}
+
+//	private static async System.Threading.Tasks.Task CreateCategoryAsync()
+//	{
+//		Models.DatabaseContext? databaseContext = null;
+
+//		try
+//		{
+//			databaseContext =
+//				new Models.DatabaseContext();
+
+//			var category =
+//				new Models.Category
+//				{
+//					Name = "My Category",
+//				};
+
+//			// **************************************************
+//			// **************************************************
+//			// **************************************************
+//			//databaseContext.Categories.Add(entity: category);
+
+//			//await databaseContext.Categories.AddAsync(entity: category);
+//			// **************************************************
+
+//			// **************************************************
+//			//var entityEntry =
+//			//	databaseContext.Categories.Add(entity: category);
+
+//			//var entityEntry =
+//			//	await
+//			//	databaseContext.Categories.AddAsync(entity: category);
+//			// **************************************************
+
+//			// **************************************************
+//			// تابع ذیل خروجی ندارد
+//			//databaseContext.Categories.AddRange(entities: category);
+
+//			// تابع ذیل خروجی ندارد
+//			//await databaseContext.Categories.AddRangeAsync(entities: category);
+//			// **************************************************
+//			// **************************************************
+//			// **************************************************
+
+//			// **************************************************
+//			// **************************************************
+//			// **************************************************
+//			//databaseContext.Add(entity: category);
+
+//			//await databaseContext.AddAsync(entity: category);
+//			// **************************************************
+
+//			// **************************************************
+//			//var entityEntry =
+//			//	databaseContext.Add(entity: category);
+
+//			// نسبت به شش حالتی که وجود دارد
+//			// به شخصه، این حالت را بیشتر می‌پسندم
+//			var entityEntry =
+//				await
+//				databaseContext.AddAsync(entity: category);
+//			// **************************************************
+
+//			// **************************************************
+//			// تابع ذیل خروجی ندارد
+//			//databaseContext.AddRange(entities: category);
+
+//			// تابع ذیل خروجی ندارد
+//			//await databaseContext.AddRangeAsync(entities: category);
+//			// **************************************************
+//			// **************************************************
+//			// **************************************************
+
+//			var affectedRows =
+//				await
+//				databaseContext.SaveChangesAsync();
+//		}
+//		catch (System.Exception ex)
+//		{
+//			// Log Error!
+
+//			System.Console.WriteLine(value: ex.Message);
+//		}
+//		finally
+//		{
+//			if (databaseContext != null)
+//			{
+//				await databaseContext.DisposeAsync();
+//			}
+//		}
+//	}
+
+//	private static async System.Threading.Tasks.Task DisplayCategoriesAsync()
+//	{
+//		Models.DatabaseContext? databaseContext = null;
+
+//		try
+//		{
+//			databaseContext =
+//				new Models.DatabaseContext();
+
+//			var categories =
+//				await
+//				databaseContext.Categories
+//				.Where(predicate: current => current.Id <= 100)
+//				.OrderBy(keySelector: current => current.Id)
+//				.ToListAsync()
+//				;
+
+//			foreach (var item in categories)
+//			{
+//				var message =
+//					$"{nameof(item.Id)}: {item.Id} - {nameof(item.Name)}: {item.Name}";
+
+//				System.Console.WriteLine(value: message);
+//			}
+//		}
+//		catch (System.Exception ex)
+//		{
+//			// Log Error!
+
+//			System.Console.WriteLine(value: ex.Message);
+//		}
+//		finally
+//		{
+//			if (databaseContext != null)
+//			{
+//				await databaseContext.DisposeAsync();
+//			}
+//		}
+//	}
+
+//	/// <summary>
+//	/// New
+//	/// </summary>
+//	private static async System.Threading.Tasks.Task UpdateTheFirstCategoryAsync()
+//	{
+//		Models.DatabaseContext? databaseContext = null;
+
+//		try
+//		{
+//			databaseContext =
+//				new Models.DatabaseContext();
+
+//			// برمی‌گرداند null ،اگر پیدا نکند
+//			// اگر فقط یکی پیدا کند، آن‌را برمی‌گرداند
+//			// اگر بیش از یکی پیدا کند، اولین آن‌را برمی‌گرداند
+//			//var category =
+//			//	databaseContext.Categories
+//			//	.FirstOrDefault();
+
+//			// New in EF Core
+//			//var category =
+//			//	await
+//			//	databaseContext.Categories
+//			//	.FirstOrDefaultAsync();
+
+//			// خیلی توصیه نمی‌کنم
+//			//var category =
+//			//	await
+//			//	databaseContext.Categories
+//			//	.FirstOrDefaultAsync(predicate: current => current.Id <= 100);
+
+//			//var category =
+//			//	await
+//			//	databaseContext.Categories
+//			//	.Where(predicate: current => current.Id <= 100)
+//			//	.FirstOrDefaultAsync();
+
+//			var category =
+//				await
+//				databaseContext.Categories
+//				.Where(predicate: current => current.Id <= 100)
+//				.OrderBy(keySelector: current => current.Id)
+//				.FirstOrDefaultAsync();
+
+//			if (category == null)
+//			{
+//				System.Console.WriteLine
+//					(value: "There is not any category!");
+
+//				return;
+//			}
+
+//			category.Name =
+//				$"{category.Name}_{category.Id}";
+
+//			var affectedRows =
+//				await
+//				databaseContext.SaveChangesAsync();
+
+//			// **************************************************
+//			// اگر پیدا نکند، خطا تولید می‌کند
+//			// اگر فقط یکی پیدا کند، آن‌را برمی‌گرداند
+//			// اگر بیش از یکی پیدا کند، اولین آن‌را برمی‌گرداند
+//			//var theCategory =
+//			//	databaseContext.Categories
+//			//	.First();
+
+//			// New in EF Core
+//			//var theCategory =
+//			//	await
+//			//	databaseContext.Categories
+//			//	.FirstAsync();
+//			// **************************************************
+
+//			// **************************************************
+//			// برمی‌گرداند null ،اگر پیدا نکند
+//			// اگر فقط یکی پیدا کند، آن‌را برمی‌گرداند
+//			// اگر بیش از یکی پیدا کند، آخرین آن‌را برمی‌گرداند
+//			//var theCategory =
+//			//	databaseContext.Categories
+//			//	.LastOrDefault();
+
+//			// New in EF Core
+//			//var theCategory =
+//			//	await
+//			//	databaseContext.Categories
+//			//	.LastOrDefaultAsync();
+//			// **************************************************
+
+//			// **************************************************
+//			// اگر پیدا نکند، خطا تولید می‌کند
+//			// اگر فقط یکی پیدا کند، آن‌را برمی‌گرداند
+//			// اگر بیش از یکی پیدا کند، آخرین آن‌را برمی‌گرداند
+//			//var theCategory =
+//			//	databaseContext.Categories
+//			//	.Last();
+
+//			// New in EF Core
+//			//var theCategory =
+//			//	await
+//			//	databaseContext.Categories
+//			//	.LastAsync();
+//			// **************************************************
+
+//			// **************************************************
+//			// برمی‌گرداند null ،اگر پیدا نکند
+//			// اگر فقط یکی پیدا کند، آن‌را برمی‌گرداند
+//			// اگر بیش از یکی پیدا کند، خطا تولید می‌کند
+//			//var theCategory =
+//			//	databaseContext.Categories
+//			//	.SingleOrDefault();
+
+//			// New in EF Core
+//			//var theCategory =
+//			//	await
+//			//	databaseContext.Categories
+//			//	.SingleOrDefaultAsync();
+//			// **************************************************
+
+//			// **************************************************
+//			// اگر پیدا نکند، خطا تولید می‌کند
+//			// اگر فقط یکی پیدا کند، آن‌را برمی‌گرداند
+//			// اگر بیش از یکی پیدا کند، خطا تولید می‌کند
+//			//var theCategory =
+//			//	databaseContext.Categories
+//			//	.Single();
+
+//			// New in EF Core
+//			//var theCategory =
+//			//	await
+//			//	databaseContext.Categories
+//			//	.SingleAsync();
+//			// **************************************************
+//		}
+//		catch (System.Exception ex)
+//		{
+//			// Log Error!
+
+//			System.Console.WriteLine(value: ex.Message);
+//		}
+//		finally
+//		{
+//			if (databaseContext != null)
+//			{
+//				await databaseContext.DisposeAsync();
+//			}
+//		}
+//	}
+
+//	/// <summary>
+//	/// New
+//	/// </summary>
+//	private static async System.Threading.Tasks.Task UpdateSomeCategoriesAsync()
+//	{
+//		Models.DatabaseContext? databaseContext = null;
+
+//		try
+//		{
+//			databaseContext =
+//				new Models.DatabaseContext();
+
+//			var categories =
+//				await
+//				databaseContext.Categories
+//				.Where(predicate: current => current.Id <= 100)
+//				.OrderBy(keySelector: current => current.Id)
+//				.ToListAsync();
+
+//			foreach (var item in categories)
+//			{
+//				item.Name =
+//					$"{item.Name}_{item.Id}";
+
+//				//var affectedRows =
+//				//	await
+//				//	databaseContext.SaveChangesAsync();
+//			}
+
+//			var affectedRows =
+//				await
+//				databaseContext.SaveChangesAsync();
+//		}
+//		catch (System.Exception ex)
+//		{
+//			// Log Error!
+
+//			System.Console.WriteLine(value: ex.Message);
+//		}
+//		finally
+//		{
+//			if (databaseContext != null)
+//			{
+//				await databaseContext.DisposeAsync();
+//			}
+//		}
+//	}
+
+//	/// <summary>
+//	/// New
+//	/// </summary>
+//	private static async System.Threading.Tasks.Task DeleteTheFirstCategoryAsync()
+//	{
+//		Models.DatabaseContext? databaseContext = null;
+
+//		try
+//		{
+//			databaseContext =
+//				new Models.DatabaseContext();
+
+//			var category =
+//				await
+//				databaseContext.Categories
+//				.Where(predicate: current => current.Id <= 100)
+//				.OrderBy(keySelector: current => current.Id)
+//				.FirstOrDefaultAsync();
+
+//			if (category == null)
+//			{
+//				System.Console.WriteLine
+//					(value: "There is not any category!");
+
+//				return;
+//			}
+
+//			// **************************************************
+//			//databaseContext.Categories.Remove(entity: category);
+
+//			//var entityEntry =
+//			//	databaseContext.Categories.Remove(entity: category);
+
+//			// دقت کنید که تابع ذیل، خروجی ندارد
+//			//databaseContext.Categories.RemoveRange(entities: category);
+//			// **************************************************
+
+//			// **************************************************
+//			// New in .NET Core
+//			//databaseContext.Remove(entity: category);
+
+//			// New in .NET Core
+//			var entityEntry =
+//				databaseContext.Remove(entity: category);
+
+//			// New in .NET Core
+//			// دقت کنید که تابع ذیل، خروجی ندارد
+//			//databaseContext.RemoveRange(entities: category);
+//			// **************************************************
+
+//			// **************************************************
+//			// ندارند Async دقت کنید که توابع فوق
+//			// **************************************************
+
+//			var affectedRows =
+//				await
+//				databaseContext.SaveChangesAsync();
+//		}
+//		catch (System.Exception ex)
+//		{
+//			// Log Error!
+
+//			System.Console.WriteLine(value: ex.Message);
+//		}
+//		finally
+//		{
+//			if (databaseContext != null)
+//			{
+//				await databaseContext.DisposeAsync();
+//			}
+//		}
+//	}
+
+//	/// <summary>
+//	/// New
+//	/// </summary>
+//	private static async System.Threading.Tasks.Task DeleteSomeCategoriesAsync()
+//	{
+//		Models.DatabaseContext? databaseContext = null;
+
+//		try
+//		{
+//			databaseContext =
+//				new Models.DatabaseContext();
+
+//			var categories =
+//				await
+//				databaseContext.Categories
+//				.ToListAsync()
+//				;
+
+//			// **************************************************
+//			// **************************************************
+//			// **************************************************
+//			//foreach (var item in categories)
+//			//{
+//			//	databaseContext.Remove(entity: item);
+
+//			//	//var affectedRows =
+//			//	//	await
+//			//	//	databaseContext.SaveChangesAsync();
+//			//}
+//			// **************************************************
+
+//			// OR
+
+//			// **************************************************
+//			//databaseContext.Categories.RemoveRange(entities: categories);
+//			// **************************************************
+
+//			// OR
+
+//			// **************************************************
+//			// نسبت به سه حالتی که وجود دارد
+//			// به شخصه، این حالت را بیشتر می‌پسندم
+//			databaseContext.RemoveRange(entities: categories);
+//			// **************************************************
+//			// **************************************************
+//			// **************************************************
+
+//			var affectedRows =
+//				await
+//				databaseContext.SaveChangesAsync();
+//		}
+//		catch (System.Exception ex)
+//		{
+//			// Log Error!
+
+//			System.Console.WriteLine(value: ex.Message);
+//		}
+//		finally
+//		{
+//			if (databaseContext != null)
+//			{
+//				await databaseContext.DisposeAsync();
+//			}
+//		}
+//	}
+//}
 // **************************************************
 // /Solution (9)
 // **************************************************

@@ -18,11 +18,35 @@ protected override void OnConfiguring
 **************************************************
 https://www.connectionstrings.com/sql-server/
 
-Server=.;Database=LEARNING_EF_CORE_0200;MultipleActiveResultSets=true;Trusted_Connection=True;
+	// ******************************************************************
+	// *** Windows Authentication Mode without TrustServerCertificate ***
+	// ******************************************************************
+	//var connectionString =
+	//	"Server=.;Database=LEARNING_EF_CORE_0200;MultipleActiveResultSets=true;Trusted_Connection=True;";
+	// ******************************************************************
 
-Server=.;Database=LEARNING_EF_CORE_0200;MultipleActiveResultSets=true;User ID=sa;Password=1234512345;
+	// ***************************************************************
+	// *** Windows Authentication Mode with TrustServerCertificate ***
+	// ***************************************************************
+	//var connectionString =
+	//	"Server=.;Database=LEARNING_EF_CORE_0200;MultipleActiveResultSets=true;Trusted_Connection=True;TrustServerCertificate=True;";
+	// ******************************************************************
 
-Connect Timeout or Connection Timeout: Default (15 Seconds)
+	// *********************************************************************
+	// *** SQL Server Authentication Mode without TrustServerCertificate ***
+	// *********************************************************************
+	//var connectionString =
+	//	"Server=.;User ID=sa;Password=1234512345;Database=LEARNING_EF_CORE_0200;MultipleActiveResultSets=true;Trusted_Connection=True;";
+	// ******************************************************************
+
+	// ******************************************************************
+	// *** SQL Server Authentication Mode with TrustServerCertificate ***
+	// ******************************************************************
+	var connectionString =
+		"Server=.;User ID=sa;Password=1234512345;Database=LEARNING_EF_CORE_0200;MultipleActiveResultSets=true;Trusted_Connection=True;TrustServerCertificate=True;";
+	// ******************************************************************
+
+	Connect Timeout or Connection Timeout: Default (15 Seconds)
 **************************************************
 
 **************************************************
