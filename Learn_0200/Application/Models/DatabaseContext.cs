@@ -42,14 +42,14 @@ public class DatabaseContext :
 		// *** SQL Server Authentication Mode without TrustServerCertificate ***
 		// *********************************************************************
 		//var connectionString =
-		//	"Server=.;User ID=sa;Password=1234512345;Database=LEARNING_EF_CORE_0200;MultipleActiveResultSets=true;Trusted_Connection=True;";
+		//	"Server=.;User ID=sa;Password=1234512345;Database=LEARNING_EF_CORE_0200;MultipleActiveResultSets=true";
 		// ******************************************************************
 
 		// ******************************************************************
 		// *** SQL Server Authentication Mode with TrustServerCertificate ***
 		// ******************************************************************
 		var connectionString =
-			"Server=.;User ID=sa;Password=1234512345;Database=LEARNING_EF_CORE_0200;MultipleActiveResultSets=true;Trusted_Connection=True;TrustServerCertificate=True;";
+			"Server=.;User ID=sa;Password=1234512345;Database=LEARNING_EF_CORE_0200;MultipleActiveResultSets=true;TrustServerCertificate=True;";
 		// ******************************************************************
 
 		// UseSqlServer() -> using Microsoft.EntityFrameworkCore;
