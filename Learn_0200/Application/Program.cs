@@ -25,40 +25,40 @@
 // **************************************************
 // Solution (1)
 // **************************************************
-namespace Application;
+//namespace Application;
 
-/// <summary>
-/// CRUD:
-/// C -> Create | U -> Update | D -> Delete | R -> Retrieve
-///
-/// Retrieve:
-///		Zero or One
-///		Zero Or Many
-/// </summary>
-internal static class Program : object
-{
-	static Program()
-	{
-	}
+///// <summary>
+///// CRUD:
+///// C -> Create | U -> Update | D -> Delete | R -> Retrieve
+/////
+///// Retrieve:
+/////		Zero or One
+/////		Zero Or Many
+///// </summary>
+//internal static class Program : object
+//{
+//	static Program()
+//	{
+//	}
 
-	private static void Main()
-	{
-		CreateCategory();
-	}
+//	private static void Main()
+//	{
+//		CreateCategory();
+//	}
 
-	private static void CreateCategory()
-	{
-		Models.DatabaseContext databaseContext = new Models.DatabaseContext();
+//	private static void CreateCategory()
+//	{
+//		Models.DatabaseContext databaseContext = new Models.DatabaseContext();
 
-		Models.Category category = new Models.Category();
+//		Models.Category category = new Models.Category();
 
-		category.Name = "My Category";
+//		category.Name = "My Category";
 
-		databaseContext.Categories.Add(entity: category);
+//		databaseContext.Categories.Add(entity: category);
 
-		databaseContext.SaveChanges();
-	}
-}
+//		databaseContext.SaveChanges();
+//	}
+//}
 // **************************************************
 // /Solution (1)
 // **************************************************
@@ -79,64 +79,97 @@ internal static class Program : object
 //		CreateCategory();
 //	}
 
-//	private static void CreateCategory()
+//	private static void HowToCreateAnObject()
 //	{
 //		// **************************************************
-//		//Models.DatabaseContext databaseContext = new Models.DatabaseContext();
-//		var databaseContext = new Models.DatabaseContext();
-//		// **************************************************
-
-//		// **************************************************
-//		//int x = 1;
-
 //		//int x;
 //		//x = 1;
 
-//		//var x = 1;
+//		//int x = 1;
 
 //		//var x; // Compile Error!
 //		//x = 1;
+
+//		//var x = 1;
+//		//var y = "Dariush";
 
 //		//var x = null; // Compile Error!
 //		// **************************************************
 
 //		// **************************************************
-//		// **************************************************
-//		// **************************************************
-//		//Models.Category category = new Models.Category();
+//		//Models.Person person = new Models.Person();
 
-//		//category.Name = "My Category";
-//		// **************************************************
-
-//		// **************************************************
-//		//Models.Category category =
-//		//	new Models.Category() { Name = "My Category" };
+//		//person.FullName = "Dariush Tasdighi";
+//		//person.Age = 50;
 //		// **************************************************
 
 //		// **************************************************
-//		//Models.Category category =
-//		//	new Models.Category { Name = "My Category" };
+//		//Models.Person person = new();
+
+//		//person.FullName = "Dariush Tasdighi";
+//		//person.Age = 50;
 //		// **************************************************
 
 //		// **************************************************
-//		//Models.Category category =
-//		//	new() { Name = "My Category" };
+//		//var person = new Models.Person();
+
+//		//person.FullName = "Dariush Tasdighi";
+//		//person.Age = 50;
 //		// **************************************************
 
 //		// **************************************************
-//		//var category =
-//		//	new Models.Category { Name = "My Category" };
+//		//var person = new Models.Person() { FullName = "Dariush Tasdighi", Age = 50 };
 //		// **************************************************
 
 //		// **************************************************
-//		//var category =
-//		//	new Models.Category
+//		//var person =
+//		//	new Models.Person()
 //		//	{
-//		//		Name = "My Category"
+//		//		FullName = "Dariush Tasdighi",
+//		//		Age = 50
 //		//	};
 //		// **************************************************
 
 //		// **************************************************
+//		//var person =
+//		//	new Models.Person
+//		//	{
+//		//		FullName = "Dariush Tasdighi",
+//		//		Age = 50
+//		//	};
+//		// **************************************************
+
+//		// **************************************************
+//		//var person =
+//		//	new Models.Person
+//		//	{
+//		//		FullName = "Dariush Tasdighi",
+//		//		Age = 50,
+//		//	};
+//		// **************************************************
+
+//		// **************************************************
+//		var person =
+//			new Models.Person
+//			{
+//				Age = 50,
+//				FullName = "Dariush Tasdighi",
+//			};
+//		// **************************************************
+//	}
+
+//	private static void CreateCategory()
+//	{
+//		// **************************************************
+//		//Models.DatabaseContext databaseContext = new Models.DatabaseContext();
+
+//		var databaseContext = new Models.DatabaseContext();
+//		// **************************************************
+
+//		// **************************************************
+//		//Models.Category category = new Models.Category();
+//		//category.Name = "My Category";
+
 //		var category =
 //			new Models.Category
 //			{
@@ -171,6 +204,23 @@ internal static class Program : object
 
 //	private static void CreateCategory()
 //	{
+//		// **************************************************
+//		//var databaseContext = new Models.DatabaseContext();
+
+//		//var category =
+//		//	new Models.Category
+//		//	{
+//		//		Name = "My Category",
+//		//	};
+
+//		//databaseContext.Categories.Add(entity: category);
+
+//		//databaseContext.SaveChanges();
+
+//		//databaseContext.Dispose();
+//		////databaseContext = null;
+//		// **************************************************
+
 //		using (var databaseContext = new Models.DatabaseContext())
 //		{
 //			var category =
@@ -207,6 +257,21 @@ internal static class Program : object
 
 //	private static void CreateCategory()
 //	{
+//		// **************************************************
+//		//using (var databaseContext = new Models.DatabaseContext())
+//		//{
+//		//	var category =
+//		//		new Models.Category
+//		//		{
+//		//			Name = "My Category",
+//		//		};
+
+//		//	databaseContext.Categories.Add(entity: category);
+
+//		//	databaseContext.SaveChanges();
+//		//}
+//		// **************************************************
+
 //		using var databaseContext =
 //			new Models.DatabaseContext();
 
@@ -243,6 +308,36 @@ internal static class Program : object
 
 //	private static void CreateCategory()
 //	{
+//		// **************************************************
+//		//DisposableClass? disposableObject = null;
+
+//		//try
+//		//{
+//		//	disposableObject =
+//		//		new DisposableClass();
+
+//		//	// با آن کار می‌کنیم
+//		//}
+//		//catch (System.Exception ex)
+//		//{
+//		//	// Log Error!
+
+//		//	// از نظر مسائل ظاهری و امنیتی دستور ذیل مناسب نمی‌باشد
+//		//	//System.Console.WriteLine(value: ex.Message);
+
+//		//	System.Console.WriteLine
+//		//		(value: "Unexpected Error!");
+//		//}
+//		//finally
+//		//{
+//		//	if (disposableObject != null)
+//		//	{
+//		//		disposableObject.Dispose();
+//		//		//disposableObject = null;
+//		//	}
+//		//}
+//		// **************************************************
+
 //		Models.DatabaseContext? databaseContext = null;
 
 //		try
@@ -262,8 +357,6 @@ internal static class Program : object
 //		}
 //		catch (System.Exception ex)
 //		{
-//			// Log Error!
-
 //			System.Console.WriteLine(value: ex.Message);
 //		}
 //		finally
@@ -317,9 +410,12 @@ internal static class Program : object
 
 //			// خطا می‌دهد EF Core در
 //			// مشکلی نداشت و صرفا توجهی به مقدار ما نمی‌کرد EF ولی در
+
 //			// Cannot insert explicit value for identity column
 //			// in table 'Categories' when IDENTITY_INSERT is set to OFF.
+
 //			//category.Id = 12345;
+//			//category.Id = 12_345;
 //			// **************************************************
 
 //			// **************************************************
@@ -381,14 +477,11 @@ internal static class Program : object
 
 //			// بعد از عملیات ذخیره‌سازی، مقدار
 //			// آی دی از بانک اطلاعاتی دریافت می‌شود
-//			id =
-//				category.Id;
+//			id = category.Id;
 //			// **************************************************
 //		}
 //		catch (System.Exception ex)
 //		{
-//			// Log Error!
-
 //			//ex.InnerException.Message
 
 //			// Cannot insert explicit value for identity column
@@ -413,73 +506,95 @@ internal static class Program : object
 // **************************************************
 // Solution (7)
 // **************************************************
-//namespace Application;
+namespace Application;
 
-//internal static class Program : object
-//{
-//	static Program()
-//	{
-//	}
+internal static class Program : object
+{
+	static Program()
+	{
+	}
 
-//	// Note: 'MainAsync' does not work!
-//	//public static async System.Threading.Tasks.Task MainAsync()
-//	public static async System.Threading.Tasks.Task Main()
-//	{
-//		await CreateCategoryAsync();
-//	}
+	// Note: 'MainAsync' does not work!
+	//public static async System.Threading.Tasks.Task MainAsync()
+	public static async System.Threading.Tasks.Task Main()
+	{
+		await CreateCategoryAsync();
+	}
 
-//	private static async System.Threading.Tasks.Task CreateCategoryAsync()
-//	{
-//		Models.DatabaseContext? databaseContext = null;
+	//private static void SomeFunction1()
+	//{
+	//}
 
-//		try
-//		{
-//			databaseContext =
-//				new Models.DatabaseContext();
+	//private static async System.Threading.Tasks.Task SomeFunction1Async()
+	//{
+	//}
 
-//			var category =
-//				new Models.Category
-//				{
-//					Name = "My Category",
-//				};
+	//private static int SomeFunction2()
+	//{
+	//}
 
-//			//var entityEntry =
-//			//	databaseContext.Add(entity: category);
+	//private static async System.Threading.Tasks.Task<int> SomeFunction2Async()
+	//{
+	//}
 
-//			var entityEntry =
-//				await
-//				databaseContext.AddAsync(entity: category);
+	private static async System.Threading.Tasks.Task CreateCategoryAsync()
+	{
+		Models.DatabaseContext? databaseContext = null;
 
-//			//var affectedRows =
-//			//	databaseContext.SaveChanges();
+		try
+		{
+			databaseContext =
+				new Models.DatabaseContext();
 
-//			var affectedRows =
-//				await
-//				databaseContext.SaveChangesAsync();
+			var category =
+				new Models.Category
+				{
+					Name = "My Category",
+				};
 
-//			//System.Console.WriteLine
-//			//	(value: $"affectedRows: {affectedRows}");
+			//var entityEntry =
+			//	databaseContext.Add(entity: category);
 
-//			System.Console.WriteLine
-//				(value: $"{nameof(affectedRows)}: {affectedRows}");
-//		}
-//		catch (System.Exception ex)
-//		{
-//			// Log Error!
+			var entityEntry =
+				await
+				databaseContext.AddAsync(entity: category);
 
-//			System.Console.WriteLine(value: ex.Message);
-//		}
-//		finally
-//		{
-//			if (databaseContext != null)
-//			{
-//				//databaseContext.Dispose();
+			//var affectedRows =
+			//	databaseContext.SaveChanges();
 
-//				await databaseContext.DisposeAsync();
-//			}
-//		}
-//	}
-//}
+			var affectedRows =
+				await
+				databaseContext.SaveChangesAsync();
+
+			//System.Console.WriteLine
+			//	(value: $"affectedRows: {affectedRows}");
+
+			// اگر سوتی دادم
+			//System.Console.WriteLine
+			//	(value: $"afectedRows: {affectedRows}");
+
+			System.Console.WriteLine
+				(value: $"{nameof(affectedRows)}: {affectedRows}");
+
+			// اگر سوتی دادم
+			//System.Console.WriteLine
+			//	(value: $"{nameof(afectedRows)}: {affectedRows}");
+		}
+		catch (System.Exception ex)
+		{
+			System.Console.WriteLine(value: ex.Message);
+		}
+		finally
+		{
+			if (databaseContext != null)
+			{
+				//databaseContext.Dispose();
+
+				await databaseContext.DisposeAsync();
+			}
+		}
+	}
+}
 // **************************************************
 // /Solution (7)
 // **************************************************

@@ -25,6 +25,11 @@ public class DatabaseContext :
 		(Microsoft.EntityFrameworkCore.DbContextOptionsBuilder optionsBuilder)
 	{
 		// ******************************************************************
+		// https://www.connectionstrings.com/sql-server/
+		// Connect Timeout or Connection Timeout: Default: 15 Seconds
+		// ******************************************************************
+
+		// ******************************************************************
 		// *** Windows Authentication Mode without TrustServerCertificate ***
 		// ******************************************************************
 		//var connectionString =
