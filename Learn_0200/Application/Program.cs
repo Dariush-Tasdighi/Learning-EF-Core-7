@@ -87,13 +87,15 @@
 
 //		//int x = 1;
 
-//		//var x; // Compile Error!
+//		//// Compile Error!
+//		//var x;
 //		//x = 1;
 
 //		//var x = 1;
 //		//var y = "Dariush";
 
-//		//var x = null; // Compile Error!
+//		//// Compile Error!
+//		//var x = null;
 //		// **************************************************
 
 //		// **************************************************
