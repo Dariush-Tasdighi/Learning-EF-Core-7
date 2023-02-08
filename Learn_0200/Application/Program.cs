@@ -77,6 +77,7 @@
 //	private static void Main()
 //	{
 //		CreateCategory();
+//		HowToCreateAnObject();
 //	}
 
 //	private static void HowToCreateAnObject()
@@ -120,7 +121,7 @@
 //		// **************************************************
 
 //		// **************************************************
-//		//var person = new Models.Person() { FullName = "Dariush Tasdighi", Age = 50 };
+//		//var person = new Models.Person() { FullName = "Dariush Tasdighi", Age = 20 };
 //		// **************************************************
 
 //		// **************************************************
