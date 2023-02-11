@@ -25,40 +25,40 @@
 // **************************************************
 // Solution (1)
 // **************************************************
-//namespace Application;
+namespace Application;
 
-///// <summary>
-///// CRUD:
-///// C -> Create | U -> Update | D -> Delete | R -> Retrieve
-/////
-///// Retrieve:
-/////		Zero or One
-/////		Zero Or Many
-///// </summary>
-//internal static class Program : object
-//{
-//	static Program()
-//	{
-//	}
+/// <summary>
+/// CRUD:
+/// C -> Create | U -> Update | D -> Delete | R -> Retrieve
+///
+/// Retrieve:
+///		Zero or One
+///		Zero Or Many
+/// </summary>
+internal static class Program : object
+{
+	static Program()
+	{
+	}
 
-//	private static void Main()
-//	{
-//		CreateCategory();
-//	}
+	private static void Main()
+	{
+		CreateCategory();
+	}
 
-//	private static void CreateCategory()
-//	{
-//		Models.DatabaseContext databaseContext = new Models.DatabaseContext();
+	private static void CreateCategory()
+	{
+		Models.DatabaseContext databaseContext = new Models.DatabaseContext();
 
-//		Models.Category category = new Models.Category();
+		Models.Category category = new Models.Category();
 
-//		category.Name = "My Category";
+		category.Name = "My Category";
 
-//		databaseContext.Categories.Add(entity: category);
+		databaseContext.Categories.Add(entity: category);
 
-//		databaseContext.SaveChanges();
-//	}
-//}
+		databaseContext.SaveChanges();
+	}
+}
 // **************************************************
 // /Solution (1)
 // **************************************************
@@ -509,95 +509,95 @@
 // **************************************************
 // Solution (7)
 // **************************************************
-namespace Application;
+//namespace Application;
 
-internal static class Program : object
-{
-	static Program()
-	{
-	}
+//internal static class Program : object
+//{
+//	static Program()
+//	{
+//	}
 
-	// Note: 'MainAsync' does not work!
-	//public static async System.Threading.Tasks.Task MainAsync()
-	public static async System.Threading.Tasks.Task Main()
-	{
-		await CreateCategoryAsync();
-	}
+//	// Note: 'MainAsync' does not work!
+//	//public static async System.Threading.Tasks.Task MainAsync()
+//	public static async System.Threading.Tasks.Task Main()
+//	{
+//		await CreateCategoryAsync();
+//	}
 
-	//private static void SomeFunction1()
-	//{
-	//}
+//	//private static void SomeFunction1()
+//	//{
+//	//}
 
-	//private static async System.Threading.Tasks.Task SomeFunction1Async()
-	//{
-	//}
+//	//private static async System.Threading.Tasks.Task SomeFunction1Async()
+//	//{
+//	//}
 
-	//private static int SomeFunction2()
-	//{
-	//}
+//	//private static int SomeFunction2()
+//	//{
+//	//}
 
-	//private static async System.Threading.Tasks.Task<int> SomeFunction2Async()
-	//{
-	//}
+//	//private static async System.Threading.Tasks.Task<int> SomeFunction2Async()
+//	//{
+//	//}
 
-	private static async System.Threading.Tasks.Task CreateCategoryAsync()
-	{
-		Models.DatabaseContext? databaseContext = null;
+//	private static async System.Threading.Tasks.Task CreateCategoryAsync()
+//	{
+//		Models.DatabaseContext? databaseContext = null;
 
-		try
-		{
-			databaseContext =
-				new Models.DatabaseContext();
+//		try
+//		{
+//			databaseContext =
+//				new Models.DatabaseContext();
 
-			var category =
-				new Models.Category
-				{
-					Name = "My Category",
-				};
+//			var category =
+//				new Models.Category
+//				{
+//					Name = "My Category",
+//				};
 
-			//var entityEntry =
-			//	databaseContext.Add(entity: category);
+//			//var entityEntry =
+//			//	databaseContext.Add(entity: category);
 
-			var entityEntry =
-				await
-				databaseContext.AddAsync(entity: category);
+//			var entityEntry =
+//				await
+//				databaseContext.AddAsync(entity: category);
 
-			//var affectedRows =
-			//	databaseContext.SaveChanges();
+//			//var affectedRows =
+//			//	databaseContext.SaveChanges();
 
-			var affectedRows =
-				await
-				databaseContext.SaveChangesAsync();
+//			var affectedRows =
+//				await
+//				databaseContext.SaveChangesAsync();
 
-			//System.Console.WriteLine
-			//	(value: $"affectedRows: {affectedRows}");
+//			//System.Console.WriteLine
+//			//	(value: $"affectedRows: {affectedRows}");
 
-			// اگر سوتی دادم
-			//System.Console.WriteLine
-			//	(value: $"afectedRows: {affectedRows}");
+//			// اگر سوتی دادم
+//			//System.Console.WriteLine
+//			//	(value: $"afectedRows: {affectedRows}");
 
-			System.Console.WriteLine
-				(value: $"{nameof(affectedRows)}: {affectedRows}");
+//			System.Console.WriteLine
+//				(value: $"{nameof(affectedRows)}: {affectedRows}");
 
-			// اگر سوتی دادم
-			//System.Console.WriteLine
-			//	(value: $"{nameof(afectedRows)}: {affectedRows}");
-		}
-		catch (System.Exception ex)
-		{
-			System.Console.WriteLine(value: ex.Message);
-		}
-		finally
-		{
-			if (databaseContext != null)
-			{
-				//databaseContext.Dispose();
+//			// اگر سوتی دادم
+//			//System.Console.WriteLine
+//			//	(value: $"{nameof(afectedRows)}: {affectedRows}");
+//		}
+//		catch (System.Exception ex)
+//		{
+//			System.Console.WriteLine(value: ex.Message);
+//		}
+//		finally
+//		{
+//			if (databaseContext != null)
+//			{
+//				//databaseContext.Dispose();
 
-				await databaseContext.DisposeAsync();
-			}
-		}
-	}
-}
+//				await databaseContext.DisposeAsync();
+//			}
+//		}
+//	}
+//}
 // **************************************************
 // /Solution (7)
 // **************************************************
@@ -713,7 +713,7 @@ internal static class Program : object
 //			//	await
 //			//	databaseContext.Categories
 //			//	// OrderBy() -> using System.Linq
-//			//	.OrderBy(keySelector: current => current.Id)
+//			//	.OrderBy(keySelector: current => current.Name)
 //			//	.ToListAsync()
 //			//	;
 //			// **************************************************
@@ -731,7 +731,7 @@ internal static class Program : object
 //			//	.ToListAsync()
 //			//	;
 //			// **************************************************
-//			// SELECT * FROM Categories ORDER BY Name DESC
+//			// SELECT * FROM Categories ORDER BY Id DESC
 //			// **************************************************
 
 //			// **************************************************
@@ -742,7 +742,7 @@ internal static class Program : object
 //			//	await
 //			//	databaseContext.Categories
 //			//	.Where(predicate: current => current.Id <= 100)
-//			//	.OrderBy(keySelector: current => current.Id)
+//			//	.OrderBy(keySelector: current => current.Name)
 //			//	.ToListAsync()
 //			//	;
 
@@ -793,7 +793,16 @@ internal static class Program : object
 //			//var categories =
 //			//	await
 //			//	databaseContext.Categories
-//			//	.Where(predicate: current => current.Name!.ToLower() == name.ToLower())
+//			//	.Where(predicate: current => current.Name.ToLower() == name.ToLower())
+//			//	.ToListAsync()
+//			//	;
+
+//			//// OR
+
+//			//var categories =
+//			//	await
+//			//	databaseContext.Categories
+//			//	.Where(predicate: current => current.Name.ToUpper() == name.ToUpper())
 //			//	.ToListAsync()
 //			//	;
 //			// **************************************************
@@ -804,13 +813,14 @@ internal static class Program : object
 //			//	var categories =
 //			//		await
 //			//		databaseContext.Categories
-//			//		.Where(predicate: current => current.Name!.ToLower() == name.ToLower())
+//			//		.Where(predicate: current => current.Name.ToLower() == name.ToLower())
 //			//		.ToListAsync()
 //			//		;
 //			//}
 //			// **************************************************
 
 //			// **************************************************
+//			// دستور درست
 //			//if (name != null)
 //			//{
 //			//	var categories =
@@ -1058,7 +1068,7 @@ internal static class Program : object
 //				await
 //				databaseContext.Categories
 //				.Where(predicate: current => current.Id <= 100)
-//				.OrderBy(keySelector: current => current.Id)
+//				.OrderBy(keySelector: current => current.Name)
 //				.ToListAsync()
 //				;
 
@@ -1098,16 +1108,18 @@ internal static class Program : object
 //				new Models.DatabaseContext();
 
 //			// برمی‌گرداند null ،اگر پیدا نکند
-//			// اگر فقط یکی پیدا کند، آن‌را برمی‌گرداند
+//			// اگر فقط یکی پیدا کند، همان یکی را برمی‌گرداند
 //			// اگر بیش از یکی پیدا کند، اولین آن‌را برمی‌گرداند
 //			//var category =
 //			//	databaseContext.Categories
+//			//	// FirstOrDefault() -> using System.Linq;
 //			//	.FirstOrDefault();
 
 //			// New in EF Core
 //			//var category =
 //			//	await
 //			//	databaseContext.Categories
+//			//	// FirstOrDefaultAsync() -> using Microsoft.EntityFrameworkCore;
 //			//	.FirstOrDefaultAsync();
 
 //			// خیلی توصیه نمی‌کنم
@@ -1126,7 +1138,7 @@ internal static class Program : object
 //				await
 //				databaseContext.Categories
 //				.Where(predicate: current => current.Id <= 100)
-//				.OrderBy(keySelector: current => current.Id)
+//				.OrderBy(keySelector: current => current.Name)
 //				.FirstOrDefaultAsync();
 
 //			if (category == null)
@@ -1137,6 +1149,8 @@ internal static class Program : object
 //				return;
 //			}
 
+//			//category.Name = "Googooli";
+
 //			category.Name =
 //				$"{category.Name}_{category.Id}";
 
@@ -1146,7 +1160,7 @@ internal static class Program : object
 
 //			// **************************************************
 //			// اگر پیدا نکند، خطا تولید می‌کند
-//			// اگر فقط یکی پیدا کند، آن‌را برمی‌گرداند
+//			// اگر فقط یکی پیدا کند، همان یکی را برمی‌گرداند
 //			// اگر بیش از یکی پیدا کند، اولین آن‌را برمی‌گرداند
 //			//var theCategory =
 //			//	databaseContext.Categories
@@ -1161,7 +1175,7 @@ internal static class Program : object
 
 //			// **************************************************
 //			// برمی‌گرداند null ،اگر پیدا نکند
-//			// اگر فقط یکی پیدا کند، آن‌را برمی‌گرداند
+//			// اگر فقط یکی پیدا کند، همان یکی را برمی‌گرداند
 //			// اگر بیش از یکی پیدا کند، آخرین آن‌را برمی‌گرداند
 //			//var theCategory =
 //			//	databaseContext.Categories
@@ -1176,7 +1190,7 @@ internal static class Program : object
 
 //			// **************************************************
 //			// اگر پیدا نکند، خطا تولید می‌کند
-//			// اگر فقط یکی پیدا کند، آن‌را برمی‌گرداند
+//			// اگر فقط یکی پیدا کند، همان یکی را برمی‌گرداند
 //			// اگر بیش از یکی پیدا کند، آخرین آن‌را برمی‌گرداند
 //			//var theCategory =
 //			//	databaseContext.Categories
@@ -1191,7 +1205,7 @@ internal static class Program : object
 
 //			// **************************************************
 //			// برمی‌گرداند null ،اگر پیدا نکند
-//			// اگر فقط یکی پیدا کند، آن‌را برمی‌گرداند
+//			// اگر فقط یکی پیدا کند، همان یکی را برمی‌گرداند
 //			// اگر بیش از یکی پیدا کند، خطا تولید می‌کند
 //			//var theCategory =
 //			//	databaseContext.Categories
@@ -1206,7 +1220,7 @@ internal static class Program : object
 
 //			// **************************************************
 //			// اگر پیدا نکند، خطا تولید می‌کند
-//			// اگر فقط یکی پیدا کند، آن‌را برمی‌گرداند
+//			// اگر فقط یکی پیدا کند، همان یکی را برمی‌گرداند
 //			// اگر بیش از یکی پیدا کند، خطا تولید می‌کند
 //			//var theCategory =
 //			//	databaseContext.Categories
@@ -1250,11 +1264,14 @@ internal static class Program : object
 //				await
 //				databaseContext.Categories
 //				.Where(predicate: current => current.Id <= 100)
-//				.OrderBy(keySelector: current => current.Id)
-//				.ToListAsync();
+//				.OrderBy(keySelector: current => current.Name)
+//				.ToListAsync()
+//				;
 
 //			foreach (var item in categories)
 //			{
+//				//item.Name = "Googooli";
+
 //				item.Name =
 //					$"{item.Name}_{item.Id}";
 
@@ -1298,7 +1315,7 @@ internal static class Program : object
 //				await
 //				databaseContext.Categories
 //				.Where(predicate: current => current.Id <= 100)
-//				.OrderBy(keySelector: current => current.Id)
+//				.OrderBy(keySelector: current => current.Name)
 //				.FirstOrDefaultAsync();
 
 //			if (category == null)
@@ -1370,6 +1387,8 @@ internal static class Program : object
 //			var categories =
 //				await
 //				databaseContext.Categories
+//				.Where(predicate: current => current.Id <= 100)
+//				.OrderBy(keySelector: current => current.Name)
 //				.ToListAsync()
 //				;
 
