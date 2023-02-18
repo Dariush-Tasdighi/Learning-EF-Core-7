@@ -1,49 +1,38 @@
-﻿namespace Dtat
+﻿namespace Dtat;
+
+public class PersianDateTime : PersianDate
 {
-	public class PersianDateTime : PersianDate
+	public PersianDateTime
+		(System.DateTimeOffset dateTime) : base(dateTime: dateTime)
 	{
-		public static string ConvertToDateTime(System.DateTime dateTime)
-		{
-			var persianDateTime =
-				new PersianDateTime(dateTime: dateTime);
+		Hour = dateTime.Hour;
+		Minute = dateTime.Minute;
+		Second = dateTime.Second;
+	}
 
-			var result =
-				persianDateTime.ToString();
+	public int Hour { get; }
 
-			return result;
-		}
+	public int Minute { get; }
 
-		public PersianDateTime(System.DateTime dateTime) : base(dateTime: dateTime)
-		{
-			Hour = dateTime.Hour;
-			Minute = dateTime.Minute;
-			Second = dateTime.Second;
-		}
+	public int Second { get; }
 
-		public int Hour { get; }
+	public override string ToString()
+	{
+		var hourString =
+			Hour.ToString()
+			.PadLeft(totalWidth: 2, paddingChar: '0');
 
-		public int Minute { get; }
+		var minuteString =
+			Minute.ToString()
+			.PadLeft(totalWidth: 2, paddingChar: '0');
 
-		public int Second { get; }
+		var secondString =
+			Second.ToString()
+			.PadLeft(totalWidth: 2, paddingChar: '0');
 
-		public override string ToString()
-		{
-			var hourString =
-				Hour.ToString()
-				.PadLeft(totalWidth: 2, paddingChar: '0');
+		var result =
+			$"{base.ToString()} - {hourString}:{minuteString}:{secondString}";
 
-			var minuteString =
-				Minute.ToString()
-				.PadLeft(totalWidth: 2, paddingChar: '0');
-
-			var secondString =
-				Second.ToString()
-				.PadLeft(totalWidth: 2, paddingChar: '0');
-
-			var result =
-				$"{base.ToString()} - {hourString}:{minuteString}:{secondString}";
-
-			return result;
-		}
+		return result;
 	}
 }

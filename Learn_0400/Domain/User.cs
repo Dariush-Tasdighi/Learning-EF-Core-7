@@ -29,7 +29,8 @@
 		public User(string emailAddress) : base()
 		{
 			//SetUpdateDateTime();
-			UpdateDateTime = InsertDateTime;
+			UpdateDateTime =
+				InsertDateTime;
 
 			//RoleId = roleId;
 			EmailAddress = emailAddress;
@@ -129,7 +130,7 @@
 
 		[System.ComponentModel.DataAnnotations.Schema.DatabaseGenerated
 			(System.ComponentModel.DataAnnotations.Schema.DatabaseGeneratedOption.None)]
-		public System.DateTime UpdateDateTime { get; private set; }
+		public System.DateTimeOffset UpdateDateTime { get; private set; }
 		// **********
 
 		// **********
@@ -270,7 +271,7 @@
 		public void SetUpdateDateTime()
 		{
 			UpdateDateTime =
-				Dtat.Utility.Now;
+				Dtat.DateTime.Now;
 		}
 
 		public void SetId(System.Guid id)

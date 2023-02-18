@@ -7,7 +7,7 @@
 			Ordering = 10_000;
 
 			InsertDateTime =
-				Dtat.Utility.Now;
+				Dtat.DateTime.Now;
 
 			Id =
 				System.Guid.NewGuid();
@@ -42,7 +42,7 @@
 
 		[System.ComponentModel.DataAnnotations.Schema.DatabaseGenerated
 			(System.ComponentModel.DataAnnotations.Schema.DatabaseGeneratedOption.None)]
-		public System.DateTime InsertDateTime { get; private set; }
+		public System.DateTimeOffset InsertDateTime { get; private set; }
 		// **********
 	}
 }

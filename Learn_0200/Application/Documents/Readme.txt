@@ -13,8 +13,6 @@ Package Manager Console:
 
 	Install-Package Microsoft.EntityFrameworkCore.SqlServer
 
-	Install-Package Microsoft.EntityFrameworkCore.SqlServer -Version 7.0.2
-
 In File: Application.csproj
 
 	<ItemGroup>

@@ -1,62 +1,56 @@
-﻿namespace Dtat
+﻿namespace Dtat;
+
+public class PersianDate : object
 {
-	public class PersianDate : object
+	static PersianDate()
 	{
-		static PersianDate()
-		{
-			PersianCalendar =
-				new System.Globalization.PersianCalendar();
-		}
+		PersianCalendar =
+			new System.Globalization.PersianCalendar();
+	}
 
-		protected static System.Globalization.PersianCalendar PersianCalendar { get; }
+	protected static System.Globalization.PersianCalendar PersianCalendar { get; }
 
-		public static string ConvertToDate(System.DateTime dateTime)
-		{
-			var persianDate =
-				new PersianDate(dateTime: dateTime);
+	public PersianDate
+		(System.DateTimeOffset dateTime) : base()
+	{
+		DateTime = dateTime;
 
-			var result =
-				persianDate.ToString();
+		Day = PersianCalendar
+			.GetDayOfMonth(time: dateTime.Date);
 
-			return result;
-		}
+		Month = PersianCalendar
+			.GetMonth(time: dateTime.Date);
 
-		public PersianDate(System.DateTime dateTime) : base()
-		{
-			DateTime = dateTime;
+		Year = PersianCalendar
+			.GetYear(time: dateTime.Date);
+	}
 
-			Day =
-				PersianCalendar.GetDayOfMonth(time: dateTime);
+	public int Day { get; }
 
-			Month =
-				PersianCalendar.GetMonth(time: dateTime);
+	public int Month { get; }
 
-			Year =
-				PersianCalendar.GetYear(time: dateTime);
-		}
+	public int Year { get; }
 
-		public int Day { get; }
+	public System.DateTimeOffset DateTime { get; }
 
-		public int Month { get; }
+	//public override string ToString()
+	//{
+	//	return base.ToString();
+	//}
 
-		public int Year { get; }
+	public override string ToString()
+	{
+		var dayString =
+			Day.ToString()
+			.PadLeft(totalWidth: 2, paddingChar: '0');
 
-		public System.DateTime DateTime { get; }
+		var monthString =
+			Month.ToString()
+			.PadLeft(totalWidth: 2, paddingChar: '0');
 
-		public override string ToString()
-		{
-			var dayString =
-				Day.ToString()
-				.PadLeft(totalWidth: 2, paddingChar: '0');
+		var result =
+			$"{Year}/{monthString}/{dayString}";
 
-			var monthString =
-				Month.ToString()
-				.PadLeft(totalWidth: 2, paddingChar: '0');
-
-			var result =
-				$"{Year}/{monthString}/{dayString}";
-
-			return result;
-		}
+		return result;
 	}
 }

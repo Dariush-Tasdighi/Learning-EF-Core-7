@@ -11,7 +11,7 @@
 		// **********
 
 		// **********
-		public System.DateTime InsertDateTime { get; }
+		public System.DateTimeOffset InsertDateTime { get; }
 		// **********
 	}
 }
