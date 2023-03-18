@@ -425,8 +425,6 @@ public class Category14 : object
 /// <summary>
 /// In Classic EF: Automatically: Country -> Countries Based on Model Name
 /// In EF Core: Automatically: Country -> Countries Based on DbSet Property Name
-/// 
-/// Example: Categories_15
 /// </summary>
 public class Category15 : object
 {
@@ -987,6 +985,8 @@ public class Category26 : object
 	// **********
 	// **********
 	// **********
+	[System.ComponentModel.DataAnnotations.Schema.DatabaseGenerated
+		(System.ComponentModel.DataAnnotations.Schema.DatabaseGeneratedOption.None)]
 	public System.DateTimeOffset InsertDateTime { get; private set; }
 	// **********
 
@@ -1009,42 +1009,42 @@ public class Category26 : object
 	// **********
 	// **********
 	/// <summary>
-	/// تبدیل به فیلد می‌شود
+	/// تبدیل به فیلد بانک اطلاعاتی می‌شود
 	/// </summary>
 	public int MyProperty11 { get; set; }
 	// **********
 
 	// **********
 	/// <summary>
-	/// تبدیل به فیلد می‌شود
+	/// تبدیل به فیلد بانک اطلاعاتی می‌شود
 	/// </summary>
 	public int MyProperty12 { get; private set; }
 	// **********
 
 	// **********
 	/// <summary>
-	/// تبدیل به فیلد می‌شود
+	/// تبدیل به فیلد بانک اطلاعاتی می‌شود
 	/// </summary>
 	public int MyProperty13 { get; protected set; }
 	// **********
 
 	// **********
 	/// <summary>
-	/// تبدیل به فیلد می‌شود
+	/// تبدیل به فیلد بانک اطلاعاتی می‌شود
 	/// </summary>
 	public int MyProperty14 { get; internal set; }
 	// **********
 
 	// **********
 	/// <summary>
-	/// تبدیل به فیلد می‌شود
+	/// تبدیل به فیلد بانک اطلاعاتی می‌شود
 	/// </summary>
 	public int MyProperty15 { get; private protected set; }
 	// **********
 
 	// **********
 	/// <summary>
-	/// تبدیل به فیلد می‌شود
+	/// تبدیل به فیلد بانک اطلاعاتی می‌شود
 	/// </summary>
 	public int MyProperty16 { get; protected internal set; }
 	// **********
@@ -1055,7 +1055,7 @@ public class Category26 : object
 	// **********
 	// **********
 	/// <summary>
-	/// !تبدیل به فیلد نمی‌شود
+	/// !تبدیل به فیلد بانک اطلاعاتی نمی‌شود
 	/// </summary>
 	public int MyProperty21 { get; }
 	// **********
@@ -1066,7 +1066,7 @@ public class Category26 : object
 	// **********
 	// **********
 	/// <summary>
-	/// !تبدیل به فیلد نمی‌شود
+	/// !تبدیل به فیلد بانک اطلاعاتی نمی‌شود
 	/// </summary>
 	[System.ComponentModel.DataAnnotations.Schema.NotMapped]
 	public int MyProperty22 { get; set; }
@@ -1078,35 +1078,35 @@ public class Category26 : object
 	// **********
 	// **********
 	/// <summary>
-	/// !تبدیل به فیلد نمی‌شود
+	/// !تبدیل به فیلد بانک اطلاعاتی نمی‌شود
 	/// </summary>
-	//private int MyProperty23 { get; set; }
+	private int MyProperty23 { get; set; }
 	// **********
 
 	// **********
 	/// <summary>
-	/// !تبدیل به فیلد نمی‌شود
+	/// !تبدیل به فیلد بانک اطلاعاتی نمی‌شود
 	/// </summary>
 	protected int MyProperty24 { get; set; }
 	// **********
 
 	// **********
 	/// <summary>
-	/// !تبدیل به فیلد نمی‌شود
+	/// !تبدیل به فیلد بانک اطلاعاتی نمی‌شود
 	/// </summary>
 	internal int MyProperty25 { get; set; }
 	// **********
 
 	// **********
 	/// <summary>
-	/// !تبدیل به فیلد نمی‌شود
+	/// !تبدیل به فیلد بانک اطلاعاتی نمی‌شود
 	/// </summary>
 	private protected int MyProperty26 { get; set; }
 	// **********
 
 	// **********
 	/// <summary>
-	/// !تبدیل به فیلد نمی‌شود
+	/// !تبدیل به فیلد بانک اطلاعاتی نمی‌شود
 	/// </summary>
 	protected internal int MyProperty27 { get; set; }
 	// **********
@@ -1152,6 +1152,8 @@ public class Category27 : object
 	// **********
 	// **********
 	// **********
+	[System.ComponentModel.DataAnnotations.Schema.DatabaseGenerated
+		(System.ComponentModel.DataAnnotations.Schema.DatabaseGeneratedOption.None)]
 	public System.DateTimeOffset InsertDateTime { get; private set; }
 	// **********
 
@@ -1186,12 +1188,6 @@ public class Category27 : object
 	// **********
 }
 // **************************************************
-// **************************************************
-// **************************************************
-
-// **************************************************
-// **************************************************
-// *** Session 17 ***********************************
 // **************************************************
 // **************************************************
 
@@ -1337,8 +1333,8 @@ public class User01 : object
 //	("Username", IsUnique = true)]
 
 // Index Name: IX_Users02_Username
-//[Microsoft.EntityFrameworkCore.Index
-//	(nameof(Username), IsUnique = true)]
+[Microsoft.EntityFrameworkCore.Index
+	(nameof(Username), IsUnique = true)]
 
 //[Microsoft.EntityFrameworkCore.Index
 //	(nameof(Username), IsUnique = true, Name = "Googooli")]
@@ -1356,6 +1352,8 @@ public class User01 : object
 [Microsoft.EntityFrameworkCore.Index
 	(nameof(FirstName), nameof(LastName), IsUnique = false)]
 
+// خطا می‌دهد EF دستور ذیل در
+//
 // با اجرای دستور ذیل اتفاق جالبی رخ می‌دهد
 // nvarchar(450)
 // صورت می‌گیرد EF Core این عمل به طور اتوماتیک توسط
@@ -1560,6 +1558,10 @@ public class User05 : object
 	//[System.ComponentModel.DataAnnotations.Display
 	//	(ResourceType = typeof(Resources.DataDictionary),
 	//	Name = "Id")]
+
+	//[System.ComponentModel.DataAnnotations.Display
+	//	(ResourceType = typeof(Resources.DataDictionary),
+	//	Name = "Idd")]
 
 	[System.ComponentModel.DataAnnotations.Display
 		(ResourceType = typeof(Resources.DataDictionary),

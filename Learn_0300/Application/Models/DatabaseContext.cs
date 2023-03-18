@@ -40,7 +40,7 @@ public class DatabaseContext :
 
 	public Microsoft.EntityFrameworkCore.DbSet<Category14> Categories14 { get; set; }
 
-	public Microsoft.EntityFrameworkCore.DbSet<Category15> Categories_15 { get; set; }
+	public Microsoft.EntityFrameworkCore.DbSet<Category15> Categories15 { get; set; }
 
 	public Microsoft.EntityFrameworkCore.DbSet<Category16> Categories16 { get; set; }
 
@@ -82,9 +82,10 @@ public class DatabaseContext :
 		(Microsoft.EntityFrameworkCore.DbContextOptionsBuilder optionsBuilder)
 	{
 		var connectionString =
-			"Server=.;Database=LEARNING_EF_CORE_0300;MultipleActiveResultSets=true;User ID=sa;Password=1234512345;";
+			"Server=.;User ID=sa;Password=1234512345;Database=LEARNING_EF_CORE_0300;MultipleActiveResultSets=true;TrustServerCertificate=True;";
 
-		// UseSqlServer() -> using Microsoft.EntityFrameworkCore;
-		optionsBuilder.UseSqlServer(connectionString: connectionString);
+		// using Microsoft.EntityFrameworkCore;
+		optionsBuilder.UseSqlServer
+			(connectionString: connectionString);
 	}
 }
