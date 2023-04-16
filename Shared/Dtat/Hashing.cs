@@ -1,29 +1,28 @@
-﻿namespace Dtat
+﻿namespace Dtat;
+
+public static class Hashing : object
 {
-	public static class Hashing : object
+	static Hashing()
 	{
-		static Hashing()
-		{
-		}
+	}
 
-		public static string GetSha256(string text)
-		{
-			var inputBytes =
-				System.Text.Encoding.UTF8.GetBytes(s: text);
+	public static string GetSha256(string text)
+	{
+		var inputBytes = System.Text
+			.Encoding.UTF8.GetBytes(s: text);
 
-			var sha =
-				System.Security.Cryptography.SHA256.Create();
+		var sha = System.Security
+			.Cryptography.SHA256.Create();
 
-			var outputBytes =
-				sha.ComputeHash(buffer: inputBytes);
+		var outputBytes =
+			sha.ComputeHash(buffer: inputBytes);
 
-			sha.Dispose();
-			//sha = null;
+		sha.Dispose();
+		//sha = null;
 
-			var result =
-				System.Convert.ToBase64String(inArray: outputBytes);
+		var result = System.Convert
+			.ToBase64String(inArray: outputBytes);
 
-			return result;
-		}
+		return result;
 	}
 }

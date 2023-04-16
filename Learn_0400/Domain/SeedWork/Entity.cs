@@ -1,48 +1,46 @@
-﻿namespace Domain.SeedWork
+﻿namespace Domain.Seedwork;
+
+public abstract class Entity : object,
+	Dtat.Seedwork.Abstractions.IEntity<System.Guid>
 {
-	public abstract class Entity : object, IEntity
+	#region Constructor
+	public Entity() : base()
 	{
-		public Entity() : base()
-		{
-			Ordering = 10_000;
+		Id = System
+			.Guid.NewGuid();
 
-			InsertDateTime =
-				Dtat.DateTime.Now;
-
-			Id =
-				System.Guid.NewGuid();
-		}
-
-		// **********
-		[System.ComponentModel.DataAnnotations.Display
-			(ResourceType = typeof(Resources.DataDictionary),
-			Name = nameof(Resources.DataDictionary.Id))]
-
-		[System.ComponentModel.DataAnnotations.Schema.DatabaseGenerated
-			(System.ComponentModel.DataAnnotations.Schema.DatabaseGeneratedOption.None)]
-		public System.Guid Id { get; protected set; }
-		// **********
-
-		// **********
-		[System.ComponentModel.DataAnnotations.Display
-			(ResourceType = typeof(Resources.DataDictionary),
-			Name = nameof(Resources.DataDictionary.Ordering))]
-
-		[System.ComponentModel.DataAnnotations.Range
-			(minimum: 1, maximum: 100_000,
-			ErrorMessageResourceType = typeof(Resources.Messages.Validations),
-			ErrorMessageResourceName = nameof(Resources.Messages.Validations.Range))]
-		public int Ordering { get; set; }
-		// **********
-
-		// **********
-		[System.ComponentModel.DataAnnotations.Display
-			(ResourceType = typeof(Resources.DataDictionary),
-			Name = nameof(Resources.DataDictionary.InsertDateTime))]
-
-		[System.ComponentModel.DataAnnotations.Schema.DatabaseGenerated
-			(System.ComponentModel.DataAnnotations.Schema.DatabaseGeneratedOption.None)]
-		public System.DateTimeOffset InsertDateTime { get; private set; }
-		// **********
+		InsertDateTime = Dtat.DateTime.Now;
 	}
+	#endregion /Constructor
+
+	#region Properties
+
+	#region public System.Guid Id { get; protected set; }
+	/// <summary>
+	/// شناسه
+	/// </summary>
+	[System.ComponentModel.DataAnnotations.Display
+		(ResourceType = typeof(Resources.DataDictionary),
+		Name = nameof(Resources.DataDictionary.Id))]
+
+	[System.ComponentModel.DataAnnotations.Schema.DatabaseGenerated
+		(System.ComponentModel.DataAnnotations.Schema.DatabaseGeneratedOption.None)]
+	public System.Guid Id { get; protected set; }
+	#endregion /public System.Guid Id { get; protected set; }
+
+	#region public System.DateTimeOffset InsertDateTime { get; private set; }
+	/// <summary>
+	/// زمان ایجاد
+	/// </summary>
+	[System.ComponentModel.DataAnnotations.Display
+		(ResourceType = typeof(Resources.DataDictionary),
+		Name = nameof(Resources.DataDictionary.InsertDateTime))]
+
+	[System.ComponentModel.DataAnnotations.Schema.DatabaseGenerated
+		(System.ComponentModel.DataAnnotations.Schema.DatabaseGeneratedOption.None)]
+	public System.DateTimeOffset InsertDateTime { get; init; }
+	//public System.DateTimeOffset InsertDateTime { get; private set; }
+	#endregion /public System.DateTimeOffset InsertDateTime { get; private set; }
+
+	#endregion /Properties
 }

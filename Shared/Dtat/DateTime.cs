@@ -31,7 +31,10 @@ public static class DateTime : object
 			System.Threading.Thread.CurrentThread.CurrentUICulture = englishCulture;
 
 			var result =
-				System.DateTime.UtcNow;
+				System.DateTime.Now;
+
+			//var result =
+			//	System.DateTime.UtcNow;
 
 			System.Threading.Thread.CurrentThread.CurrentCulture = currentCulture;
 			System.Threading.Thread.CurrentThread.CurrentUICulture = currentUICulture;

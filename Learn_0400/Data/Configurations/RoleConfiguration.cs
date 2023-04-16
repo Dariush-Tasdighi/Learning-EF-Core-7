@@ -1,97 +1,98 @@
-﻿namespace Data.Configurations
+﻿using Domain.Features.Identity;
+
+namespace Persistence.Configurations;
+
+internal class RoleConfiguration : object,
+	Microsoft.EntityFrameworkCore.IEntityTypeConfiguration<Role>
 {
-	internal class RoleConfiguration : object,
-		Microsoft.EntityFrameworkCore.IEntityTypeConfiguration<Domain.Role>
+	public RoleConfiguration() : base()
 	{
-		public RoleConfiguration() : base()
-		{
-		}
+	}
 
-		public void Configure
-			(Microsoft.EntityFrameworkCore.Metadata.Builders.EntityTypeBuilder<Domain.Role> builder)
-		{
-			// **************************************************
-			// **************************************************
-			// **************************************************
-			//builder
-			//	.HasIndex(propertyNames: "Name")
-			//	.IsUnique(unique: true)
-			//	;
+	public void Configure(Microsoft.EntityFrameworkCore
+		.Metadata.Builders.EntityTypeBuilder<Role> builder)
+	{
+		// **************************************************
+		// **************************************************
+		// **************************************************
+		//builder
+		//	.HasIndex(propertyNames: "Name")
+		//	.IsUnique(unique: true)
+		//	;
 
-			//builder
-			//	.HasIndex(propertyNames: nameof(Domain.Role.Name))
-			//	.IsUnique(unique: true)
-			//	;
+		//builder
+		//	.HasIndex(propertyNames: nameof(Domain.Role.Name))
+		//	.IsUnique(unique: true)
+		//	;
 
-			//builder
-			//	.HasIndex(indexExpression: current => current.Name)
-			//	.IsUnique(unique: true)
-			//	;
+		//builder
+		//	.HasIndex(indexExpression: current => current.Name)
+		//	.IsUnique(unique: true)
+		//	;
 
-			//builder
-			//	.HasIndex(indexExpression: current => new { current.Name })
-			//	.IsUnique(unique: true)
-			//	;
+		//builder
+		//	.HasIndex(indexExpression: current => new { current.Name })
+		//	.IsUnique(unique: true)
+		//	;
 
-			builder
-				.HasIndex(current => new { current.Name })
-				.IsUnique(unique: true)
-				;
-			// **************************************************
-			// **************************************************
-			// **************************************************
+		builder
+			.HasIndex(current => new { current.Name })
+			.IsUnique(unique: true)
+			;
+		// **************************************************
+		// **************************************************
+		// **************************************************
 
-			// **************************************************
-			// **************************************************
-			// **************************************************
-			//builder
-			//	.HasMany(current => current.Users)
-			//	.WithOne(other => other.Role)
-			//	.IsRequired(required: true)
-			//	.HasForeignKey(other => other.RoleId)
-			//	.OnDelete(deleteBehavior:
-			//		Microsoft.EntityFrameworkCore.DeleteBehavior.NoAction)
-			//	;
+		// **************************************************
+		// **************************************************
+		// **************************************************
+		//builder
+		//	.HasMany(current => current.Users)
+		//	.WithOne(other => other.Role)
+		//	.IsRequired(required: true)
+		//	.HasForeignKey(other => other.RoleId)
+		//	.OnDelete(deleteBehavior:
+		//		Microsoft.EntityFrameworkCore.DeleteBehavior.NoAction)
+		//	;
 
-			builder
-				.HasMany(current => current.Users)
-				.WithOne(other => other.Role)
-				.IsRequired(required: false)
-				.HasForeignKey(other => other.RoleId)
-				.OnDelete(deleteBehavior:
-					Microsoft.EntityFrameworkCore.DeleteBehavior.NoAction)
-				;
-			// **************************************************
-			// **************************************************
-			// **************************************************
+		builder
+			.HasMany(current => current.Users)
+			.WithOne(other => other.Role)
+			.IsRequired(required: false)
+			.HasForeignKey(other => other.RoleId)
+			.OnDelete(deleteBehavior:
+				Microsoft.EntityFrameworkCore.DeleteBehavior.NoAction)
+			;
+		// **************************************************
+		// **************************************************
+		// **************************************************
 
-			// **************************************************
-			// **************************************************
-			// **************************************************
-			//var role =
-			//	new Domain.Role(name: "کاربر معمولی")
-			//	{
-			//		//Id,
-			//		//Name,
-			//		//Users
-			//		//InsertDateTime,
-			//		//UpdateDateTime,
+		// **************************************************
+		// **************************************************
+		// **************************************************
+		//var role =
+		//	new Domain.Role(name: "کاربر معمولی")
+		//	{
+		//		//Id,
+		//		//Name,
+		//		//Users
+		//		//InsertDateTime,
+		//		//UpdateDateTime,
 
-			//		Ordering = 0,
+		//		Ordering = 0,
 
-			//		IsActive = true,
-			//		IsSystemic = true,
-			//		IsUndeletable = true,
+		//		IsActive = true,
+		//		IsSystemic = true,
+		//		IsUndeletable = true,
 
-			//		Description = null,
-			//	};
+		//		Description = null,
+		//	};
 
-			////role.SetId(id: Domain.Role.DefaultRoleId);
+		////role.SetId(id: Domain.Role.DefaultRoleId);
 
-			//builder.HasData(data: role);
-			// **************************************************
-			// **************************************************
-			// **************************************************
-		}
+		//builder.HasData(data: role);
+		// **************************************************
+		// **************************************************
+		// **************************************************
 	}
 }

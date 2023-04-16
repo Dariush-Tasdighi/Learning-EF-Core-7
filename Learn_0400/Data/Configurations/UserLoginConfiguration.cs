@@ -1,30 +1,29 @@
-﻿namespace Data.Configurations
+﻿namespace Persistence.Configurations;
+
+internal class UserLoginConfiguration : object,
+	Microsoft.EntityFrameworkCore.IEntityTypeConfiguration<Domain.UserLogin>
 {
-	internal class UserLoginConfiguration : object,
-		Microsoft.EntityFrameworkCore.IEntityTypeConfiguration<Domain.UserLogin>
+	public UserLoginConfiguration() : base()
 	{
-		public UserLoginConfiguration() : base()
-		{
-		}
+	}
 
-		public void Configure
-			(Microsoft.EntityFrameworkCore.Metadata.Builders.EntityTypeBuilder<Domain.UserLogin> builder)
-		{
-			// **************************************************
-			// **************************************************
-			// **************************************************
-			builder
-				.Property(current => current.UserIP)
-				.IsUnicode(unicode: false)
-				;
+	public void Configure(Microsoft.EntityFrameworkCore
+		.Metadata.Builders.EntityTypeBuilder<Domain.UserLogin> builder)
+	{
+		// **************************************************
+		// **************************************************
+		// **************************************************
+		builder
+			.Property(current => current.UserIP)
+			.IsUnicode(unicode: false)
+			;
 
-			builder
-				.HasIndex(current => new { current.UserIP })
-				.IsUnique(unique: false)
-				;
-			// **************************************************
-			// **************************************************
-			// **************************************************
-		}
+		builder
+			.HasIndex(current => new { current.UserIP })
+			.IsUnique(unique: false)
+			;
+		// **************************************************
+		// **************************************************
+		// **************************************************
 	}
 }

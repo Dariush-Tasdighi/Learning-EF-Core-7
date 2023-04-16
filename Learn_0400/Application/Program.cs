@@ -30,12 +30,12 @@ namespace Application
 
 		private static async System.Threading.Tasks.Task CreateRoleAsync()
 		{
-			Data.DatabaseContext? databaseContext = null;
+			Persistence.DatabaseContext? databaseContext = null;
 
 			try
 			{
 				databaseContext =
-					new Data.DatabaseContext();
+					new Persistence.DatabaseContext();
 
 				var roleName = "مدیر";
 
@@ -54,16 +54,16 @@ namespace Application
 				}
 
 				var role =
-					new Domain.Role(name: roleName)
+					new Domain.Features.Identity.Role(name: roleName)
 					{
 						IsActive = true,
 					};
 
 				var isValid =
-					Domain.SeedWork.ValidationHelper.IsValid(entity: role);
+					Domain.Seedwork.ValidationHelper.IsValid(entity: role);
 
 				var results =
-					Domain.SeedWork.ValidationHelper.GetValidationResults(entity: role);
+					Domain.Seedwork.ValidationHelper.GetValidationResults(entity: role);
 
 				if (isValid)
 				{
@@ -93,12 +93,12 @@ namespace Application
 
 		private static async System.Threading.Tasks.Task CreateUserAsync()
 		{
-			Data.DatabaseContext? databaseContext = null;
+			Persistence.DatabaseContext? databaseContext = null;
 
 			try
 			{
 				databaseContext =
-					new Data.DatabaseContext();
+					new Persistence.DatabaseContext();
 
 				//var defaultRole =
 				//	await
@@ -135,7 +135,7 @@ namespace Application
 				//	new Domain.User(emailAddress: emailAddress, roleId: Domain.Role.DefaultRoleId)
 
 				var user =
-					new Domain.User(emailAddress: emailAddress)
+					new Domain.Features.Identity.User(emailAddress: emailAddress)
 					{
 						IsActive = true,
 						IsEmailAddressVerified = true,
@@ -147,10 +147,10 @@ namespace Application
 					};
 
 				var isValid =
-					Domain.SeedWork.ValidationHelper.IsValid(entity: user);
+					Domain.Seedwork.ValidationHelper.IsValid(entity: user);
 
 				var results =
-					Domain.SeedWork.ValidationHelper.GetValidationResults(entity: user);
+					Domain.Seedwork.ValidationHelper.GetValidationResults(entity: user);
 
 				if (isValid)
 				{
@@ -180,12 +180,12 @@ namespace Application
 
 		private static async System.Threading.Tasks.Task CreateSomeUserLoginsAsync()
 		{
-			Data.DatabaseContext? databaseContext = null;
+			Persistence.DatabaseContext? databaseContext = null;
 
 			try
 			{
 				databaseContext =
-					new Data.DatabaseContext();
+					new Persistence.DatabaseContext();
 
 				var emailAddress =
 					"DariushTasdighi@GMail.com";
@@ -213,10 +213,10 @@ namespace Application
 						new Domain.UserLogin(userId: foundedUser.Id, userIP: usesrIP);
 
 					var isValid =
-						Domain.SeedWork.ValidationHelper.IsValid(entity: userLogin);
+						Domain.Seedwork.ValidationHelper.IsValid(entity: userLogin);
 
 					var results =
-						Domain.SeedWork.ValidationHelper.GetValidationResults(entity: userLogin);
+						Domain.Seedwork.ValidationHelper.GetValidationResults(entity: userLogin);
 
 					if (isValid)
 					{
@@ -247,12 +247,12 @@ namespace Application
 
 		private static async System.Threading.Tasks.Task DeleteUserAsync()
 		{
-			Data.DatabaseContext? databaseContext = null;
+			Persistence.DatabaseContext? databaseContext = null;
 
 			try
 			{
 				databaseContext =
-					new Data.DatabaseContext();
+					new Persistence.DatabaseContext();
 
 				var emailAddress =
 					"DariushTasdighi@GMail.com";
