@@ -135,6 +135,12 @@
   <data name="MinLength" xml:space="preserve">
     <value>طول متن فیلد '{0}' باید حداقل '{1}' کاراکتر باشد!</value>
   </data>
+  <data name="Name" xml:space="preserve">
+    <value>'{0}' معتبر نمی‌باشد!</value>
+  </data>
+  <data name="NationalCode" xml:space="preserve">
+    <value>'{0}' معتبر نمی‌باشد!</value>
+  </data>
   <data name="Password" xml:space="preserve">
     <value>'{0}' معتبر نمی‌باشد!</value>
   </data>

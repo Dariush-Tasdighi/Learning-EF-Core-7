@@ -1,17 +1,29 @@
-﻿namespace Persistence.Configurations;
+﻿namespace Persistence.Configurations.Features.Idenity;
 
-internal class UserConfiguration : object,
-	Microsoft.EntityFrameworkCore.IEntityTypeConfiguration<Domain.Features.Identity.User>
+internal sealed class UserConfiguration : object, Microsoft
+	.EntityFrameworkCore.IEntityTypeConfiguration<Domain.Features.Identity.User>
 {
 	public UserConfiguration() : base()
 	{
 	}
 
-	public void Configure(Microsoft.EntityFrameworkCore
-		.Metadata.Builders.EntityTypeBuilder<Domain.Features.Identity.User> builder)
+	public void Configure(Microsoft.EntityFrameworkCore.Metadata
+		.Builders.EntityTypeBuilder<Domain.Features.Identity.User> builder)
 	{
 		// **************************************************
 		// **************************************************
+		// **************************************************
+		builder
+			.Property(current => current.NationalCode)
+			.IsUnicode(unicode: false)
+			;
+
+		builder
+			.HasIndex(current => new { current.NationalCode })
+			.IsUnique(unique: true)
+			;
+		// **************************************************
+
 		// **************************************************
 		builder
 			.Property(current => current.EmailAddress)
@@ -94,59 +106,7 @@ internal class UserConfiguration : object,
 		// **************************************************
 		// **************************************************
 		// **************************************************
-		builder
-			.HasMany(current => current.UserLogins)
-			.WithOne(other => other.User)
-			.IsRequired(required: true)
-			.HasForeignKey(other => other.UserId)
-			.OnDelete(deleteBehavior:
-				Microsoft.EntityFrameworkCore.DeleteBehavior.Cascade)
-			;
-		// **************************************************
-		// **************************************************
-		// **************************************************
 
-		// **************************************************
-		// **************************************************
-		// **************************************************
-		//var user =
-		//	new Domain.User(emailAddress: "DariushT@GMail.com", roleId: Domain.Role.DefaultRoleId)
-
-		var user =
-			new Domain.Features.Identity.User
-			(emailAddress: "DariushT@GMail.com")
-			{
-				//Id,
-				//Role,
-				//RoleId,
-				//EmailAddress,
-				//InsertDateTime,
-				//UpdateDateTime,
-				//EmailAddressVerificationKey
-				//CellPhoneNumberVerificationKey,
-
-				//Ordering = 0,
-
-				IsActive = true,
-				IsSystemic = true,
-				IsProgrammer = true,
-				IsUndeletable = true,
-				IsProfilePublic = true,
-				IsEmailAddressVerified = true,
-				IsCellPhoneNumberVerified = true,
-
-				Description = null,
-				AdminDescription = null,
-
-				Username = "Dariush",
-				FullName = "داریوش تصدیقی",
-				CellPhoneNumber = "09121087461",
-
-				Password =
-					Dtat.Hashing.GetSha256(text: "1234512345"),
-			};
-
-		builder.HasData(data: user);
 		// **************************************************
 		// **************************************************
 		// **************************************************

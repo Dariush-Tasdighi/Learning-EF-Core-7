@@ -9,6 +9,7 @@
 	<ItemGroup>
 		<ProjectReference Include="..\..\Shared\Dtat\Dtat.csproj" />
 		<ProjectReference Include="..\..\Shared\Resources\Resources.csproj" />
+		<ProjectReference Include="..\..\src\Core\Constants\Constants.csproj" />
 		<ProjectReference Include="..\..\Framework\Dtat.Seedwork.Abstractions\Dtat.Seedwork.Abstractions.csproj" />
 	</ItemGroup>
 

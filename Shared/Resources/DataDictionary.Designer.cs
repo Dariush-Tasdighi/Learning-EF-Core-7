@@ -88,6 +88,33 @@ namespace Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Code.
+        /// </summary>
+        public static string Code {
+            get {
+                return ResourceManager.GetString("Code", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Cover Image URL.
+        /// </summary>
+        public static string CoverImageUrl {
+            get {
+                return ResourceManager.GetString("CoverImageUrl", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Delete Time.
+        /// </summary>
+        public static string DeleteDateTime {
+            get {
+                return ResourceManager.GetString("DeleteDateTime", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Description.
         /// </summary>
         public static string Description {
@@ -151,6 +178,15 @@ namespace Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Image URL.
+        /// </summary>
+        public static string ImageUrl {
+            get {
+                return ResourceManager.GetString("ImageUrl", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Insert Date Time.
         /// </summary>
         public static string InsertDateTime {
@@ -196,11 +232,38 @@ namespace Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Deleted.
+        /// </summary>
+        public static string IsDeleted {
+            get {
+                return ResourceManager.GetString("IsDeleted", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Email Address Verified.
         /// </summary>
         public static string IsEmailAddressVerified {
             get {
                 return ResourceManager.GetString("IsEmailAddressVerified", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Featured.
+        /// </summary>
+        public static string IsFeatured {
+            get {
+                return ResourceManager.GetString("IsFeatured", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to National Code Verified.
+        /// </summary>
+        public static string IsNationalCodeVerified {
+            get {
+                return ResourceManager.GetString("IsNationalCodeVerified", resourceCulture);
             }
         }
         
@@ -232,11 +295,56 @@ namespace Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Test Data.
+        /// </summary>
+        public static string IsTestData {
+            get {
+                return ResourceManager.GetString("IsTestData", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Undeletable.
         /// </summary>
         public static string IsUndeletable {
             get {
                 return ResourceManager.GetString("IsUndeletable", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Verified.
+        /// </summary>
+        public static string IsVerified {
+            get {
+                return ResourceManager.GetString("IsVerified", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Visible in Contact Us Page.
+        /// </summary>
+        public static string IsVisibleInContactUsPage {
+            get {
+                return ResourceManager.GetString("IsVisibleInContactUsPage", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Last Change Password Time.
+        /// </summary>
+        public static string LastChangePasswordDateTime {
+            get {
+                return ResourceManager.GetString("LastChangePasswordDateTime", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Last Login Time.
+        /// </summary>
+        public static string LastLoginDateTime {
+            get {
+                return ResourceManager.GetString("LastLoginDateTime", resourceCulture);
             }
         }
         
@@ -259,6 +367,15 @@ namespace Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to National Code.
+        /// </summary>
+        public static string NationalCode {
+            get {
+                return ResourceManager.GetString("NationalCode", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Ordering.
         /// </summary>
         public static string Ordering {
@@ -277,11 +394,29 @@ namespace Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Register IP.
+        /// </summary>
+        public static string RegisterIP {
+            get {
+                return ResourceManager.GetString("RegisterIP", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Role.
         /// </summary>
         public static string Role {
             get {
                 return ResourceManager.GetString("Role", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Score.
+        /// </summary>
+        public static string Score {
+            get {
+                return ResourceManager.GetString("Score", resourceCulture);
             }
         }
         

@@ -16,7 +16,7 @@ namespace Application
 			// **************************************************
 
 			// **************************************************
-			await CreateUserAsync();
+			await CreateSimpleUserAsync();
 			// **************************************************
 
 			// **************************************************
@@ -54,7 +54,9 @@ namespace Application
 				}
 
 				var role =
-					new Domain.Features.Identity.Role(name: roleName)
+					new Domain.Features.Identity.Role
+					(code: Domain.Features.Identity.Enums.RoleEnum.SimpleUser, name:
+					nameof(Domain.Features.Identity.Enums.RoleEnum.SimpleUser), title: "Simple User")
 					{
 						IsActive = true,
 					};
@@ -91,7 +93,7 @@ namespace Application
 			}
 		}
 
-		private static async System.Threading.Tasks.Task CreateUserAsync()
+		private static async System.Threading.Tasks.Task CreateSimpleUserAsync()
 		{
 			Persistence.DatabaseContext? databaseContext = null;
 
@@ -100,19 +102,20 @@ namespace Application
 				databaseContext =
 					new Persistence.DatabaseContext();
 
-				//var defaultRole =
-				//	await
-				//	databaseContext.Roles
-				//	.Where(current => current.Id == Domain.Role.DefaultRoleId)
-				//	.FirstOrDefaultAsync();
+				var simpleUserRole =
+					await
+					databaseContext.Roles
+					.Where(current => current.Code ==
+						Domain.Features.Identity.Enums.RoleEnum.SimpleUser)
+					.FirstOrDefaultAsync();
 
-				//if (defaultRole == null)
-				//{
-				//	System.Console.WriteLine
-				//		(value: $"There is not any default role!");
+				if (simpleUserRole is null)
+				{
+					System.Console.WriteLine
+						(value: $"There is not simple user role!");
 
-				//	return;
-				//}
+					return;
+				}
 
 				var emailAddress =
 					"DariushTasdighi@GMail.com";
@@ -123,7 +126,7 @@ namespace Application
 					.Where(current => current.EmailAddress.ToLower() == emailAddress.ToLower())
 					.FirstOrDefaultAsync();
 
-				if (foundedUser != null)
+				if (foundedUser is not null)
 				{
 					System.Console.WriteLine
 						(value: $"This user [{emailAddress}] already exists!");
@@ -131,20 +134,17 @@ namespace Application
 					return;
 				}
 
-				//var user =
-				//	new Domain.User(emailAddress: emailAddress, roleId: Domain.Role.DefaultRoleId)
-
 				var user =
-					new Domain.Features.Identity.User(emailAddress: emailAddress)
+					new Domain.Features.Identity.User(emailAddress:
+					emailAddress, roleId: simpleUserRole.Id, registerIP: "127.0.0.1")
 					{
 						IsActive = true,
 						IsEmailAddressVerified = true,
 
 						CellPhoneNumber = "09121086174",
-
-						Password =
-							Dtat.Hashing.GetSha256(text: "1234512345"),
 					};
+
+				user.SetPassword(password: "1234512345");
 
 				var isValid =
 					Domain.Seedwork.ValidationHelper.IsValid(entity: user);
@@ -204,31 +204,31 @@ namespace Application
 					return;
 				}
 
-				for (int index = 1; index <= 5; index++)
-				{
-					var usesrIP =
-						$"{index}.{index}.{index}.{index}";
+				//for (int index = 1; index <= 5; index++)
+				//{
+				//	var usesrIP =
+				//		$"{index}.{index}.{index}.{index}";
 
-					var userLogin =
-						new Domain.UserLogin(userId: foundedUser.Id, userIP: usesrIP);
+				//	//var userLogin =
+				//	//	new Domain.UserLogin(userId: foundedUser.Id, userIP: usesrIP);
 
-					var isValid =
-						Domain.Seedwork.ValidationHelper.IsValid(entity: userLogin);
+				//	var isValid =
+				//		Domain.Seedwork.ValidationHelper.IsValid(entity: userLogin);
 
-					var results =
-						Domain.Seedwork.ValidationHelper.GetValidationResults(entity: userLogin);
+				//	var results =
+				//		Domain.Seedwork.ValidationHelper.GetValidationResults(entity: userLogin);
 
-					if (isValid)
-					{
-						var entityEntry =
-							await
-							databaseContext.AddAsync(entity: userLogin);
+				//	if (isValid)
+				//	{
+				//		var entityEntry =
+				//			await
+				//			databaseContext.AddAsync(entity: userLogin);
 
-						var affectedRows =
-							await
-							databaseContext.SaveChangesAsync();
-					}
-				}
+				//		var affectedRows =
+				//			await
+				//			databaseContext.SaveChangesAsync();
+				//	}
+				//}
 			}
 			catch (System.Exception ex)
 			{

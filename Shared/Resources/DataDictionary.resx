@@ -126,6 +126,15 @@
   <data name="CellPhoneNumberVerificationKey" xml:space="preserve">
     <value>Cell Phone Number Verification Key</value>
   </data>
+  <data name="Code" xml:space="preserve">
+    <value>Code</value>
+  </data>
+  <data name="CoverImageUrl" xml:space="preserve">
+    <value>Cover Image URL</value>
+  </data>
+  <data name="DeleteDateTime" xml:space="preserve">
+    <value>Delete Time</value>
+  </data>
   <data name="Description" xml:space="preserve">
     <value>Description</value>
   </data>
@@ -147,6 +156,9 @@
   <data name="Id" xml:space="preserve">
     <value>Id</value>
   </data>
+  <data name="ImageUrl" xml:space="preserve">
+    <value>Image URL</value>
+  </data>
   <data name="InsertDateTime" xml:space="preserve">
     <value>Insert Date Time</value>
   </data>
@@ -162,8 +174,17 @@
   <data name="IsDefault" xml:space="preserve">
     <value>Default</value>
   </data>
+  <data name="IsDeleted" xml:space="preserve">
+    <value>Deleted</value>
+  </data>
   <data name="IsEmailAddressVerified" xml:space="preserve">
     <value>Email Address Verified</value>
+  </data>
+  <data name="IsFeatured" xml:space="preserve">
+    <value>Featured</value>
+  </data>
+  <data name="IsNationalCodeVerified" xml:space="preserve">
+    <value>National Code Verified</value>
   </data>
   <data name="IsProfilePublic" xml:space="preserve">
     <value>Profile is Public</value>
@@ -174,8 +195,23 @@
   <data name="IsSystemic" xml:space="preserve">
     <value>Systemic</value>
   </data>
+  <data name="IsTestData" xml:space="preserve">
+    <value>Test Data</value>
+  </data>
   <data name="IsUndeletable" xml:space="preserve">
     <value>Undeletable</value>
+  </data>
+  <data name="IsVerified" xml:space="preserve">
+    <value>Verified</value>
+  </data>
+  <data name="IsVisibleInContactUsPage" xml:space="preserve">
+    <value>Visible in Contact Us Page</value>
+  </data>
+  <data name="LastChangePasswordDateTime" xml:space="preserve">
+    <value>Last Change Password Time</value>
+  </data>
+  <data name="LastLoginDateTime" xml:space="preserve">
+    <value>Last Login Time</value>
   </data>
   <data name="LastName" xml:space="preserve">
     <value>Last Name</value>
@@ -183,14 +219,23 @@
   <data name="Name" xml:space="preserve">
     <value>Name</value>
   </data>
+  <data name="NationalCode" xml:space="preserve">
+    <value>National Code</value>
+  </data>
   <data name="Ordering" xml:space="preserve">
     <value>Ordering</value>
   </data>
   <data name="Password" xml:space="preserve">
     <value>Password</value>
   </data>
+  <data name="RegisterIP" xml:space="preserve">
+    <value>Register IP</value>
+  </data>
   <data name="Role" xml:space="preserve">
     <value>Role</value>
+  </data>
+  <data name="Score" xml:space="preserve">
+    <value>Score</value>
   </data>
   <data name="Title" xml:space="preserve">
     <value>Title</value>

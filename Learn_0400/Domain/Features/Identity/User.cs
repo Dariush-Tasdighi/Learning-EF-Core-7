@@ -1,122 +1,417 @@
 ﻿namespace Domain.Features.Identity;
 
-public class User : Seedwork.Entity,
+public class User :
+	Seedwork.Entity,
 	Dtat.Seedwork.Abstractions.IEntityHasIsActive,
-	Dtat.Seedwork.Abstractions.IEntityHasIsSystemic,
+	Dtat.Seedwork.Abstractions.IEntityHasOrdering,
+	Dtat.Seedwork.Abstractions.IEntityHasIsDeleted,
+	Dtat.Seedwork.Abstractions.IEntityHasIsTestData,
 	Dtat.Seedwork.Abstractions.IEntityHasIsUndeletable,
 	Dtat.Seedwork.Abstractions.IEntityHasUpdateDateTime
 {
-	//public User(string emailAddress, System.Guid roleId) : base()
-	//{
-	//	//SetUpdateDateTime();
-	//	UpdateDateTime = InsertDateTime;
-
-	//	RoleId = roleId;
-	//	EmailAddress = emailAddress;
-	//	EmailAddressVerificationKey = System.Guid.NewGuid();
-
-	//	UserLogins =
-	//		new System.Collections.Generic.List<UserLogin>();
-	//}
-
-	public User(string emailAddress) : base()
+	#region Constructor
+	public User(string emailAddress,
+		System.Guid roleId, string registerIP) : base()
 	{
-		//SetUpdateDateTime();
-		UpdateDateTime =
-			InsertDateTime;
+		Ordering = 10_000;
 
-		//RoleId = roleId;
-		EmailAddress = emailAddress;
-		EmailAddressVerificationKey = System.Guid.NewGuid();
+		RoleId = roleId;
 
-		UserLogins =
-			new System.Collections.Generic.List<UserLogin>();
+		RegisterIP = registerIP;
+
+		UpdateDateTime = InsertDateTime;
+
+		ResetVerificationKey();
+		EmailAddress = emailAddress.ToLower();
 	}
+	#endregion /Constructor
 
-	// **********
-	// **********
-	// **********
-	//[System.ComponentModel.DataAnnotations.Display
-	//	(ResourceType = typeof(Resources.DataDictionary),
-	//	Name = nameof(Resources.DataDictionary.Role))]
+	#region Properties
 
-	//[System.ComponentModel.DataAnnotations.Required
-	//	(ErrorMessageResourceType = typeof(Resources.Messages.Validations),
-	//	ErrorMessageResourceName = nameof(Resources.Messages.Validations.Required))]
-	//public System.Guid RoleId { get; set; }
-	// **********
-
-	// **********
-	[System.ComponentModel.DataAnnotations.Display
-		(ResourceType = typeof(Resources.DataDictionary),
-		Name = nameof(Resources.DataDictionary.Role))]
-	public System.Guid? RoleId { get; set; }
-	// **********
-
-	// **********
+	#region public System.Guid RoleId { get; set; }
+	/// <summary>
+	/// نقش کاربر
+	/// </summary>
 	[System.ComponentModel.DataAnnotations.Display
 		(ResourceType = typeof(Resources.DataDictionary),
 		Name = nameof(Resources.DataDictionary.Role))]
 
-	// نکته مهم: نباید دستور ذیل نوشته شود
-	//[System.ComponentModel.DataAnnotations.Required
-	//	(ErrorMessageResourceType = typeof(Resources.Messages.Validations),
-	//	ErrorMessageResourceName = nameof(Resources.Messages.Validations.Required))]
+	[System.ComponentModel.DataAnnotations.Required
+		(AllowEmptyStrings = false,
+		ErrorMessageResourceType = typeof(Resources.Messages.Validations),
+		ErrorMessageResourceName = nameof(Resources.Messages.Validations.Required))]
+	public System.Guid RoleId { get; set; }
+	#endregion /public System.Guid RoleId { get; set; }
+
+	#region public virtual Role? Role { get; set; }
+	/// <summary>
+	/// نقش کاربر
+	/// </summary>
+	[System.ComponentModel.DataAnnotations.Display
+		(ResourceType = typeof(Resources.DataDictionary),
+		Name = nameof(Resources.DataDictionary.Role))]
+
+	[System.ComponentModel.DataAnnotations.Required
+		(AllowEmptyStrings = false,
+		ErrorMessageResourceType = typeof(Resources.Messages.Validations),
+		ErrorMessageResourceName = nameof(Resources.Messages.Validations.Required))]
 	public virtual Role? Role { get; set; }
-	// **********
-	// **********
-	// **********
+	#endregion /public virtual Role? Role { get; set; }
 
-	// **********
+
+
+	#region public bool IsActive { get; set; }
+	/// <summary>
+	/// وضعیت
+	/// </summary>
 	[System.ComponentModel.DataAnnotations.Display
 		(ResourceType = typeof(Resources.DataDictionary),
 		Name = nameof(Resources.DataDictionary.IsActive))]
 	public bool IsActive { get; set; }
-	// **********
+	#endregion /public bool IsActive { get; set; }
 
-	// **********
+	#region public bool IsFeatured { get; set; }
+	/// <summary>
+	/// ویژه بودن کاربر
+	/// </summary>
 	[System.ComponentModel.DataAnnotations.Display
 		(ResourceType = typeof(Resources.DataDictionary),
-		Name = nameof(Resources.DataDictionary.IsSystemic))]
-	public bool IsSystemic { get; set; }
-	// **********
+		Name = nameof(Resources.DataDictionary.IsFeatured))]
+	public bool IsFeatured { get; set; }
+	#endregion /public bool IsFeatured { get; set; }
 
-	// **********
+	#region public bool IsTestData { get; set; }
+	/// <summary>
+	/// داده تستی
+	/// </summary>
 	[System.ComponentModel.DataAnnotations.Display
 		(ResourceType = typeof(Resources.DataDictionary),
-		Name = nameof(Resources.DataDictionary.IsProgrammer))]
-	public bool IsProgrammer { get; set; }
-	// **********
+		Name = nameof(Resources.DataDictionary.IsTestData))]
+	public bool IsTestData { get; set; }
+	#endregion /public bool IsTestData { get; set; }
 
-	// **********
+	#region public bool IsVerified { get; set; }
+	/// <summary>
+	/// تایید شده
+	/// </summary>
+	[System.ComponentModel.DataAnnotations.Display
+		(ResourceType = typeof(Resources.DataDictionary),
+		Name = nameof(Resources.DataDictionary.IsVerified))]
+	public bool IsVerified { get; set; }
+	#endregion /public bool IsVerified { get; set; }
+
+	#region public bool IsUndeletable { get; set; }
+	/// <summary>
+	/// غیر قابل حذف
+	/// </summary>
 	[System.ComponentModel.DataAnnotations.Display
 		(ResourceType = typeof(Resources.DataDictionary),
 		Name = nameof(Resources.DataDictionary.IsUndeletable))]
 	public bool IsUndeletable { get; set; }
-	// **********
+	#endregion /public bool IsUndeletable { get; set; }
 
-	// **********
+	#region public bool IsProfilePublic { get; set; }
+	/// <summary>
+	/// پروفایل به صورت عمومی قابل روئت خواهد بود
+	/// </summary>
 	[System.ComponentModel.DataAnnotations.Display
 		(ResourceType = typeof(Resources.DataDictionary),
 		Name = nameof(Resources.DataDictionary.IsProfilePublic))]
 	public bool IsProfilePublic { get; set; }
-	// **********
+	#endregion /public bool IsProfilePublic { get; set; }
 
-	// **********
+	#region public bool IsDeleted { get; private set; }
+	/// <summary>
+	/// آیا به طور مجازی حذف شده؟
+	/// </summary>
+	[System.ComponentModel.DataAnnotations.Display
+		(ResourceType = typeof(Resources.DataDictionary),
+		Name = nameof(Resources.DataDictionary.IsDeleted))]
+	public bool IsDeleted { get; private set; }
+	#endregion /public bool IsDeleted { get; private set; }
+
+	#region public bool IsEmailAddressVerified { get; set; }
+	/// <summary>
+	/// نشانی پست الکترونیکی تایید شده است
+	/// </summary>
 	[System.ComponentModel.DataAnnotations.Display
 		(ResourceType = typeof(Resources.DataDictionary),
 		Name = nameof(Resources.DataDictionary.IsEmailAddressVerified))]
 	public bool IsEmailAddressVerified { get; set; }
-	// **********
+	#endregion /public bool IsEmailAddressVerified { get; set; }
 
-	// **********
+	#region public bool IsNationalCodeVerified { get; set; }
+	/// <summary>
+	/// آیا کد ملی تایید شده است یا خیر؟
+	/// </summary>
+	[System.ComponentModel.DataAnnotations.Display
+		(ResourceType = typeof(Resources.DataDictionary),
+		Name = nameof(Resources.DataDictionary.IsNationalCodeVerified))]
+	public bool IsNationalCodeVerified { get; set; }
+	#endregion /public bool IsNationalCodeVerified { get; set; }
+
+	#region public bool IsVisibleInContactUsPage { get; set; }
+	/// <summary>
+	/// در صفحه تماس با ما نمایش داده شود
+	/// </summary>
+	[System.ComponentModel.DataAnnotations.Display
+		(ResourceType = typeof(Resources.DataDictionary),
+		Name = nameof(Resources.DataDictionary.IsVisibleInContactUsPage))]
+	public bool IsVisibleInContactUsPage { get; set; }
+	#endregion /public bool IsVisibleInContactUsPage { get; set; }
+
+	#region public bool IsCellPhoneNumberVerified { get; set; }
+	/// <summary>
+	/// شماره تلفن همراه تایید شده است
+	/// </summary>
 	[System.ComponentModel.DataAnnotations.Display
 		(ResourceType = typeof(Resources.DataDictionary),
 		Name = nameof(Resources.DataDictionary.IsCellPhoneNumberVerified))]
 	public bool IsCellPhoneNumberVerified { get; set; }
-	// **********
+	#endregion /public bool IsCellPhoneNumberVerified { get; set; }
 
-	// **********
+
+
+	#region public int Score { get; set; }
+	/// <summary>
+	/// امتیاز کاربر
+	/// </summary>
+	[System.ComponentModel.DataAnnotations.Display
+		(ResourceType = typeof(Resources.DataDictionary),
+		Name = nameof(Resources.DataDictionary.Score))]
+
+	[System.ComponentModel.DataAnnotations.Required
+		(AllowEmptyStrings = false,
+		ErrorMessageResourceType = typeof(Resources.Messages.Validations),
+		ErrorMessageResourceName = nameof(Resources.Messages.Validations.Required))]
+	public int Score { get; set; }
+	#endregion /public int Score { get; set; }
+
+	#region public int Ordering { get; set; }
+	/// <summary>
+	/// چیدمان
+	/// </summary>
+	[System.ComponentModel.DataAnnotations.Display
+		(ResourceType = typeof(Resources.DataDictionary),
+		Name = nameof(Resources.DataDictionary.Ordering))]
+
+	[System.ComponentModel.DataAnnotations.Required
+		(AllowEmptyStrings = false,
+		ErrorMessageResourceType = typeof(Resources.Messages.Validations),
+		ErrorMessageResourceName = nameof(Resources.Messages.Validations.Required))]
+
+	[System.ComponentModel.DataAnnotations.Range
+		(minimum: 1, maximum: 100_000,
+		ErrorMessageResourceType = typeof(Resources.Messages.Validations),
+		ErrorMessageResourceName = nameof(Resources.Messages.Validations.Range))]
+	public int Ordering { get; set; }
+	#endregion /public int Ordering { get; set; }
+
+
+
+	#region public string? Username { get; set; }
+	/// <summary>
+	/// شناسه کاربری
+	/// </summary>
+	[System.ComponentModel.DataAnnotations.Display
+		(ResourceType = typeof(Resources.DataDictionary),
+		Name = nameof(Resources.DataDictionary.Username))]
+
+	[System.ComponentModel.DataAnnotations.MaxLength
+		(length: Constants.MaxLength.Username,
+		ErrorMessageResourceType = typeof(Resources.Messages.Validations),
+		ErrorMessageResourceName = nameof(Resources.Messages.Validations.MaxLength))]
+	public string? Username { get; set; }
+	#endregion /public string? Username { get; set; }
+
+	#region public string RegisterIP { get; set; }
+	/// <summary>
+	/// آی‌پی کاربر در زمان ثبت‌نام
+	/// </summary>
+	[System.ComponentModel.DataAnnotations.Display
+		(ResourceType = typeof(Resources.DataDictionary),
+		Name = nameof(Resources.DataDictionary.RegisterIP))]
+
+	[System.ComponentModel.DataAnnotations.Required
+		(AllowEmptyStrings = false,
+		ErrorMessageResourceType = typeof(Resources.Messages.Validations),
+		ErrorMessageResourceName = nameof(Resources.Messages.Validations.Required))]
+
+	[System.ComponentModel.DataAnnotations.MaxLength
+		(length: Constants.MaxLength.IP,
+		ErrorMessageResourceType = typeof(Resources.Messages.Validations),
+		ErrorMessageResourceName = nameof(Resources.Messages.Validations.MaxLength))]
+	public string RegisterIP { get; set; }
+	#endregion /public string RegisterIP { get; set; }
+
+	#region public string EmailAddress { get; set; }
+	/// <summary>
+	/// نشانی پست الکترونیکی
+	/// </summary>
+	[System.ComponentModel.DataAnnotations.Display
+		(ResourceType = typeof(Resources.DataDictionary),
+		Name = nameof(Resources.DataDictionary.EmailAddress))]
+
+	[System.ComponentModel.DataAnnotations.Required
+		(AllowEmptyStrings = false,
+		ErrorMessageResourceType = typeof(Resources.Messages.Validations),
+		ErrorMessageResourceName = nameof(Resources.Messages.Validations.Required))]
+
+	[System.ComponentModel.DataAnnotations.MaxLength
+		(length: Constants.MaxLength.EmailAddress,
+		ErrorMessageResourceType = typeof(Resources.Messages.Validations),
+		ErrorMessageResourceName = nameof(Resources.Messages.Validations.MaxLength))]
+
+	[System.ComponentModel.DataAnnotations.RegularExpression
+		(pattern: Constants.RegularExpression.EmailAddress,
+		ErrorMessageResourceType = typeof(Resources.Messages.Validations),
+		ErrorMessageResourceName = nameof(Resources.Messages.Validations.EmailAddress))]
+	public string EmailAddress { get; set; }
+	#endregion /public string EmailAddress { get; set; }
+
+	#region public string? NationalCode { get; set; }
+	/// <summary>
+	/// کد ملی
+	/// </summary>
+	[System.ComponentModel.DataAnnotations.Display
+		(ResourceType = typeof(Resources.DataDictionary),
+		Name = nameof(Resources.DataDictionary.NationalCode))]
+
+	[System.ComponentModel.DataAnnotations.MaxLength
+		(length: Constants.FixedLength.NationalCode,
+		ErrorMessageResourceType = typeof(Resources.Messages.Validations),
+		ErrorMessageResourceName = nameof(Resources.Messages.Validations.MaxLength))]
+
+	[System.ComponentModel.DataAnnotations.RegularExpression
+		(pattern: Constants.RegularExpression.NationalCode,
+		ErrorMessageResourceType = typeof(Resources.Messages.Validations),
+		ErrorMessageResourceName = nameof(Resources.Messages.Validations.NationalCode))]
+	public string? NationalCode { get; set; }
+	#endregion /public string? NationalCode { get; set; }
+
+	#region public string? CellPhoneNumber { get; set; }
+	/// <summary>
+	/// شماره تلفن همراه
+	/// </summary>
+	[System.ComponentModel.DataAnnotations.Display
+		(ResourceType = typeof(Resources.DataDictionary),
+		Name = nameof(Resources.DataDictionary.CellPhoneNumber))]
+
+	[System.ComponentModel.DataAnnotations.MaxLength
+		(length: Constants.MaxLength.CellPhoneNumber,
+		ErrorMessageResourceType = typeof(Resources.Messages.Validations),
+		ErrorMessageResourceName = nameof(Resources.Messages.Validations.MaxLength))]
+
+	[System.ComponentModel.DataAnnotations.RegularExpression
+		(pattern: Constants.RegularExpression.CellPhoneNumber,
+		ErrorMessageResourceType = typeof(Resources.Messages.Validations),
+		ErrorMessageResourceName = nameof(Resources.Messages.Validations.CellPhoneNumber))]
+	public string? CellPhoneNumber { get; set; }
+	#endregion /public string? CellPhoneNumber { get; set; }
+
+	#region public string? AdminDescription { get; set; }
+	/// <summary>
+	/// توضیحات مدیریتی
+	/// </summary>
+	[System.ComponentModel.DataAnnotations.Display
+		(ResourceType = typeof(Resources.DataDictionary),
+		Name = nameof(Resources.DataDictionary.AdminDescription))]
+	public string? AdminDescription { get; set; }
+	#endregion /public string? AdminDescription { get; set; }
+
+	#region public string? Password { get; private set; }
+	/// <summary>
+	/// گذرواژه
+	/// </summary>
+	[System.ComponentModel.DataAnnotations.Display
+		(ResourceType = typeof(Resources.DataDictionary),
+		Name = nameof(Resources.DataDictionary.Password))]
+
+	[System.ComponentModel.DataAnnotations.MinLength
+		(length: Constants.FixedLength.DatabasePassword,
+		ErrorMessageResourceType = typeof(Resources.Messages.Validations),
+		ErrorMessageResourceName = nameof(Resources.Messages.Validations.MaxLength))]
+
+	[System.ComponentModel.DataAnnotations.MaxLength
+		(length: Constants.FixedLength.DatabasePassword,
+		ErrorMessageResourceType = typeof(Resources.Messages.Validations),
+		ErrorMessageResourceName = nameof(Resources.Messages.Validations.MaxLength))]
+	public string? Password { get; private set; }
+	#endregion /public string? Password { get; private set; }
+
+
+
+	#region public string? ImageUrl { get; set; }
+	/// <summary>
+	/// نشانی تصویر
+	/// </summary>
+	[System.ComponentModel.DataAnnotations.Display
+		(ResourceType = typeof(Resources.DataDictionary),
+		Name = nameof(Resources.DataDictionary.ImageUrl))]
+	public string? ImageUrl { get; set; }
+	#endregion /public string? ImageUrl { get; set; }
+
+	#region public string? CoverImageUrl { get; set; }
+	/// <summary>
+	/// نشانی تصویر کاور
+	/// </summary>
+	[System.ComponentModel.DataAnnotations.Display
+		(ResourceType = typeof(Resources.DataDictionary),
+		Name = nameof(Resources.DataDictionary.CoverImageUrl))]
+	public string? CoverImageUrl { get; set; }
+	#endregion /public string? CoverImageUrl { get; set; }
+
+
+
+	#region public string? CellPhoneNumberVerificationKey { get; private set; }
+	/// <summary>
+	/// کد تایید شماره تلفن همراه
+	/// </summary>
+	[System.ComponentModel.DataAnnotations.Display
+		(ResourceType = typeof(Resources.DataDictionary),
+		Name = nameof(Resources.DataDictionary.CellPhoneNumberVerificationKey))]
+
+	[System.ComponentModel.DataAnnotations.MinLength
+		(length: Constants.MinLength.CellPhoneNumberVerificationKey,
+		ErrorMessageResourceType = typeof(Resources.Messages.Validations),
+		ErrorMessageResourceName = nameof(Resources.Messages.Validations.MinLength))]
+
+	[System.ComponentModel.DataAnnotations.MaxLength
+		(length: Constants.MaxLength.CellPhoneNumberVerificationKey,
+		ErrorMessageResourceType = typeof(Resources.Messages.Validations),
+		ErrorMessageResourceName = nameof(Resources.Messages.Validations.MaxLength))]
+	public string? CellPhoneNumberVerificationKey { get; private set; }
+	#endregion /public string? CellPhoneNumberVerificationKey { get; private set; }
+
+	#region public System.Guid EmailAddressVerificationKey { get; private set; }
+	/// <summary>
+	/// کد تایید نشانی پست الکترونیکی
+	/// </summary>
+	[System.ComponentModel.DataAnnotations.Display
+		(ResourceType = typeof(Resources.DataDictionary),
+		Name = nameof(Resources.DataDictionary.EmailAddressVerificationKey))]
+	public System.Guid EmailAddressVerificationKey { get; private set; }
+	#endregion /public System.Guid EmailAddressVerificationKey { get; private set; }
+
+
+
+	#region public System.DateTimeOffset? LastLoginDateTime { get; set; }
+	/// <summary>
+	/// آخرین زمان ورود به سامانه
+	/// </summary>
+	[System.ComponentModel.DataAnnotations.Display
+		(ResourceType = typeof(Resources.DataDictionary),
+		Name = nameof(Resources.DataDictionary.LastLoginDateTime))]
+
+	[System.ComponentModel.DataAnnotations.Schema.DatabaseGenerated
+		(System.ComponentModel.DataAnnotations.Schema.DatabaseGeneratedOption.None)]
+	public System.DateTimeOffset? LastLoginDateTime { get; set; }
+	#endregion /public System.DateTimeOffset? LastLoginDateTime { get; set; }
+
+	#region public System.DateTimeOffset UpdateDateTime { get; private set; }
+	/// <summary>
+	/// زمان ویرایش
+	/// </summary>
 	[System.ComponentModel.DataAnnotations.Display
 		(ResourceType = typeof(Resources.DataDictionary),
 		Name = nameof(Resources.DataDictionary.UpdateDateTime))]
@@ -124,150 +419,93 @@ public class User : Seedwork.Entity,
 	[System.ComponentModel.DataAnnotations.Schema.DatabaseGenerated
 		(System.ComponentModel.DataAnnotations.Schema.DatabaseGeneratedOption.None)]
 	public System.DateTimeOffset UpdateDateTime { get; private set; }
-	// **********
+	#endregion /public System.DateTimeOffset UpdateDateTime { get; private set; }
 
-	// **********
+	#region public System.DateTimeOffset? DeleteDateTime { get; private set; }
 	/// <summary>
-	/// Note: Username is nullable!
+	/// زمان حذف مجازی
 	/// </summary>
 	[System.ComponentModel.DataAnnotations.Display
 		(ResourceType = typeof(Resources.DataDictionary),
-		Name = nameof(Resources.DataDictionary.Username))]
+		Name = nameof(Resources.DataDictionary.DeleteDateTime))]
 
-	[System.ComponentModel.DataAnnotations.MaxLength
-		(length: Seedwork.Constant.MaxLength.Username,
-		ErrorMessageResourceType = typeof(Resources.Messages.Validations),
-		ErrorMessageResourceName = nameof(Resources.Messages.Validations.MaxLength))]
+	[System.ComponentModel.DataAnnotations.Schema.DatabaseGenerated
+		(System.ComponentModel.DataAnnotations.Schema.DatabaseGeneratedOption.None)]
+	public System.DateTimeOffset? DeleteDateTime { get; private set; }
+	#endregion /public System.DateTimeOffset? DeleteDateTime { get; private set; }
 
-	[System.ComponentModel.DataAnnotations.RegularExpression
-		(pattern: Seedwork.Constant.RegularExpression.Username,
-		ErrorMessageResourceType = typeof(Resources.Messages.Validations),
-		ErrorMessageResourceName = nameof(Resources.Messages.Validations.Username))]
-	public string? Username { get; set; }
-	// **********
-
-	// **********
+	#region public System.DateTimeOffset? LastChangePasswordDateTime { get; private set; }
 	/// <summary>
-	/// Note: Password is nullable!
+	/// آخرین زمان تغییر گذرواژه
 	/// </summary>
 	[System.ComponentModel.DataAnnotations.Display
 		(ResourceType = typeof(Resources.DataDictionary),
-		Name = nameof(Resources.DataDictionary.Password))]
+		Name = nameof(Resources.DataDictionary.LastChangePasswordDateTime))]
 
-	[System.ComponentModel.DataAnnotations.MinLength
-		(length: Seedwork.Constant.FixedLength.DatabasePassword,
-		ErrorMessageResourceType = typeof(Resources.Messages.Validations),
-		ErrorMessageResourceName = nameof(Resources.Messages.Validations.MinLength))]
+	[System.ComponentModel.DataAnnotations.Schema.DatabaseGenerated
+		(System.ComponentModel.DataAnnotations.Schema.DatabaseGeneratedOption.None)]
+	public System.DateTimeOffset? LastChangePasswordDateTime { get; private set; }
+	#endregion /public System.DateTimeOffset? LastChangePasswordDateTime { get; private set; }
 
-	[System.ComponentModel.DataAnnotations.MaxLength
-		(length: Seedwork.Constant.FixedLength.DatabasePassword,
-		ErrorMessageResourceType = typeof(Resources.Messages.Validations),
-		ErrorMessageResourceName = nameof(Resources.Messages.Validations.MaxLength))]
+	#endregion /Properties
 
-	// نکته مهم: دستور ذیل نباید نوشته شود
-	// ها می‌باشد ViewModel دستور ذیل مربوط به
-	//[System.ComponentModel.DataAnnotations.RegularExpression
-	//	(pattern: SeedWork.Constant.RegularExpression.Password,
-	//	ErrorMessageResourceType = typeof(Resources.Messages.Validations),
-	//	ErrorMessageResourceName = nameof(Resources.Messages.Validations.Password))]
-	public string? Password { get; set; }
-	// **********
+	#region Methods
 
-	// **********
-	[System.ComponentModel.DataAnnotations.Display
-		(ResourceType = typeof(Resources.DataDictionary),
-		Name = nameof(Resources.DataDictionary.FullName))]
+	#region Delete()
+	public void Delete()
+	{
+		IsDeleted = true;
 
-	[System.ComponentModel.DataAnnotations.MaxLength
-		(length: Seedwork.Constant.MaxLength.FullName,
-		ErrorMessageResourceType = typeof(Resources.Messages.Validations),
-		ErrorMessageResourceName = nameof(Resources.Messages.Validations.MaxLength))]
-	public string? FullName { get; set; }
-	// **********
+		DeleteDateTime =
+			Dtat.DateTime.Now;
+	}
+	#endregion /Delete()
 
-	// **********
-	[System.ComponentModel.DataAnnotations.Display
-		(ResourceType = typeof(Resources.DataDictionary),
-		Name = nameof(Resources.DataDictionary.EmailAddress))]
+	#region Undelete()
+	public void Undelete()
+	{
+		IsDeleted = false;
 
-	[System.ComponentModel.DataAnnotations.Required
-		(ErrorMessageResourceType = typeof(Resources.Messages.Validations),
-		ErrorMessageResourceName = nameof(Resources.Messages.Validations.Required))]
+		DeleteDateTime = null;
+	}
+	#endregion /Undelete()
 
-	[System.ComponentModel.DataAnnotations.MaxLength
-		(length: Seedwork.Constant.MaxLength.EmailAddress,
-		ErrorMessageResourceType = typeof(Resources.Messages.Validations),
-		ErrorMessageResourceName = nameof(Resources.Messages.Validations.MaxLength))]
+	#region SetPassword()
+	public void SetPassword(string? password)
+	{
+		if (string.IsNullOrWhiteSpace(value: password))
+		{
+			Password = null;
+		}
+		else
+		{
+			var passwordHash = Dtat.Security
+				.Hashing.GetSha256(value: password);
 
-	[System.ComponentModel.DataAnnotations.RegularExpression
-		(pattern: Seedwork.Constant.RegularExpression.EmailAddress,
-		ErrorMessageResourceType = typeof(Resources.Messages.Validations),
-		ErrorMessageResourceName = nameof(Resources.Messages.Validations.EmailAddress))]
-	public string EmailAddress { get; set; }
-	// **********
+			Password = passwordHash;
 
-	// **********
-	[System.ComponentModel.DataAnnotations.Display
-		(ResourceType = typeof(Resources.DataDictionary),
-		Name = nameof(Resources.DataDictionary.EmailAddressVerificationKey))]
-	public System.Guid EmailAddressVerificationKey { get; private set; }
-	// **********
+			LastChangePasswordDateTime = Dtat.DateTime.Now;
+		}
+	}
+	#endregion /SetPassword()
 
-	// **********
-	[System.ComponentModel.DataAnnotations.Display
-		(ResourceType = typeof(Resources.DataDictionary),
-		Name = nameof(Resources.DataDictionary.CellPhoneNumber))]
-
-	[System.ComponentModel.DataAnnotations.MaxLength
-		(length: Seedwork.Constant.FixedLength.CellPhoneNumber,
-		ErrorMessageResourceType = typeof(Resources.Messages.Validations),
-		ErrorMessageResourceName = nameof(Resources.Messages.Validations.MaxLength))]
-
-	[System.ComponentModel.DataAnnotations.RegularExpression
-		(pattern: Seedwork.Constant.RegularExpression.CellPhoneNumber,
-		ErrorMessageResourceType = typeof(Resources.Messages.Validations),
-		ErrorMessageResourceName = nameof(Resources.Messages.Validations.CellPhoneNumber))]
-	public string? CellPhoneNumber { get; set; }
-	// **********
-
-	// **********
-	[System.ComponentModel.DataAnnotations.Display
-		(ResourceType = typeof(Resources.DataDictionary),
-		Name = nameof(Resources.DataDictionary.CellPhoneNumberVerificationKey))]
-
-	[System.ComponentModel.DataAnnotations.MinLength
-		(length: Seedwork.Constant.MinLength.CellPhoneNumberVerificationKey,
-		ErrorMessageResourceType = typeof(Resources.Messages.Validations),
-		ErrorMessageResourceName = nameof(Resources.Messages.Validations.MinLength))]
-
-	[System.ComponentModel.DataAnnotations.MaxLength
-		(length: Seedwork.Constant.MaxLength.CellPhoneNumberVerificationKey,
-		ErrorMessageResourceType = typeof(Resources.Messages.Validations),
-		ErrorMessageResourceName = nameof(Resources.Messages.Validations.MaxLength))]
-	public string? CellPhoneNumberVerificationKey { get; private set; }
-	// **********
-
-	// **********
-	[System.ComponentModel.DataAnnotations.Display
-		(ResourceType = typeof(Resources.DataDictionary),
-		Name = nameof(Resources.DataDictionary.Description))]
-	public string? Description { get; set; }
-	// **********
-
-	// **********
-	[System.ComponentModel.DataAnnotations.Display
-		(ResourceType = typeof(Resources.DataDictionary),
-		Name = nameof(Resources.DataDictionary.AdminDescription))]
-	public string? AdminDescription { get; set; }
-	// **********
-
+	#region SetUpdateDateTime()
 	public void SetUpdateDateTime()
 	{
 		UpdateDateTime =
 			Dtat.DateTime.Now;
 	}
+	#endregion /SetUpdateDateTime()
 
-	// **********
-	public virtual System.Collections.Generic.IList<UserLogin> UserLogins { get; private set; }
-	// **********
+	#region ResetVerificationKey()
+	public void ResetVerificationKey()
+	{
+		EmailAddressVerificationKey = System.Guid.NewGuid();
+	}
+	#endregion /ResetVerificationKey()
+
+	#endregion /Methods
+
+	#region Collections
+	#endregion /Collections
 }

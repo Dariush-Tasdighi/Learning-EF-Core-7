@@ -17,8 +17,6 @@ public class DatabaseContext :
 
 	public Microsoft.EntityFrameworkCore.DbSet<User> Users { get; set; }
 
-	public Microsoft.EntityFrameworkCore.DbSet<Domain.UserLogin> UserLogins { get; set; }
-
 	protected override void OnConfiguring
 		(Microsoft.EntityFrameworkCore.DbContextOptionsBuilder optionsBuilder)
 	{
@@ -62,7 +60,7 @@ public class DatabaseContext :
 
 		// Solution (5)
 		modelBuilder.ApplyConfigurationsFromAssembly
-			(assembly: typeof(Configurations.RoleConfiguration).Assembly);
+			(assembly: typeof(DatabaseContext).Assembly);
 		// /Solution (5)
 	}
 }
