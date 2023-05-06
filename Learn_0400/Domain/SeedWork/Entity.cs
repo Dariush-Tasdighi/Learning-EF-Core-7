@@ -38,8 +38,7 @@ public abstract class Entity : object,
 
 	[System.ComponentModel.DataAnnotations.Schema.DatabaseGenerated
 		(System.ComponentModel.DataAnnotations.Schema.DatabaseGeneratedOption.None)]
-	public System.DateTimeOffset InsertDateTime { get; init; }
-	//public System.DateTimeOffset InsertDateTime { get; private set; }
+	public System.DateTimeOffset InsertDateTime { get; private set; }
 	#endregion /public System.DateTimeOffset InsertDateTime { get; private set; }
 
 	#endregion /Properties

@@ -234,7 +234,7 @@ IList<User> Users (Navigation Property)			Role Role (Navigation Property)
 - Entity.cs
 	- abstract
 	- Id { get; [protected] set; }
-	- InsertDateTime { get; init; }
+	- InsertDateTime { get; private; }
 
 - ValidationHelper.cs
 

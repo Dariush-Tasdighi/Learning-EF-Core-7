@@ -22,8 +22,8 @@ public class Role : Seedwork.Entity,
 		//SetUpdateDateTime();
 		UpdateDateTime = InsertDateTime;
 
-		Users =
-			new System.Collections.Generic.List<User>();
+		Users = new System
+			.Collections.Generic.List<User>();
 	}
 	#endregion /Constructor
 
