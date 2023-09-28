@@ -57,7 +57,7 @@ public class DatabaseContext :
 			"Server=.;User ID=sa;Password=1234512345;Database=LEARNING_EF_CORE_0200;MultipleActiveResultSets=true;TrustServerCertificate=True;";
 		// ******************************************************************
 
-		// UseSqlServer() -> using Microsoft.EntityFrameworkCore;
+		// UseSqlServer -> using Microsoft.EntityFrameworkCore;
 		optionsBuilder.UseSqlServer
 			(connectionString: connectionString);
 	}

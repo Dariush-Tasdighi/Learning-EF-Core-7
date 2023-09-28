@@ -16,7 +16,7 @@ Package Manager Console:
 In File: Application.csproj
 
 	<ItemGroup>
-		<PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="7.0.2" />
+		<PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="7.0.11" />
 	</ItemGroup>
 **************************************************
 
