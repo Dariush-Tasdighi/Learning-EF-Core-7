@@ -16,6 +16,7 @@
 // توصیه می‌شود که نام پارامترهای
 // توابع را در هنگام فراخوانی اعلام نموده و بنویسیم
 // **************************************************
+////System.Console.WriteLine("Hello World!");
 //System.Console.WriteLine(value: "Hello World!");
 // **************************************************
 // /Solution (2)
@@ -80,6 +81,9 @@ internal static class Program : object
 
 	private static void Main()
 	{
+		System.Console.WriteLine(int.MaxValue);
+		System.Console.WriteLine(long.MaxValue);
+
 		System.Console.WriteLine(value: "Hello World!");
 	}
 }
