@@ -8,6 +8,8 @@ public class DatabaseContext :
 	public DatabaseContext() : base()
 	{
 		// TODO: Never use in production mode
+		// نکته بسیار مهم
+		// تا قبل از اولین نسخه‌ای که می‌خواهیم آن‌را منتشر نماییم
 		Database.EnsureCreated();
 	}
 

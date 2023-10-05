@@ -25,40 +25,40 @@
 // **************************************************
 // Solution (1)
 // **************************************************
-namespace Application;
+//namespace Application;
 
-/// <summary>
-/// CRUD:
-/// C -> Create | U -> Update | D -> Delete | R -> Retrieve
-///
-/// Retrieve:
-///		Zero or One
-///		Zero Or Many
-/// </summary>
-internal static class Program : object
-{
-	static Program()
-	{
-	}
+///// <summary>
+///// CRUD:
+///// C -> Create | U -> Update | D -> Delete | R -> Retrieve
+/////
+///// Retrieve:
+/////		Zero or One
+/////		Zero Or Many
+///// </summary>
+//internal static class Program : object
+//{
+//	static Program()
+//	{
+//	}
 
-	private static void Main()
-	{
-		CreateCategory();
-	}
+//	private static void Main()
+//	{
+//		CreateCategory();
+//	}
 
-	private static void CreateCategory()
-	{
-		Models.DatabaseContext databaseContext = new Models.DatabaseContext();
+//	private static void CreateCategory()
+//	{
+//		Models.DatabaseContext databaseContext = new Models.DatabaseContext();
 
-		Models.Category category = new Models.Category();
+//		Models.Category category = new Models.Category();
 
-		category.Name = "My Category";
+//		category.Name = "My Category";
 
-		databaseContext.Categories.Add(entity: category);
+//		databaseContext.Categories.Add(category);
 
-		databaseContext.SaveChanges();
-	}
-}
+//		databaseContext.SaveChanges();
+//	}
+//}
 // **************************************************
 // /Solution (1)
 // **************************************************
@@ -164,22 +164,22 @@ internal static class Program : object
 //	private static void CreateCategory()
 //	{
 //		// **************************************************
-//		//Models.DatabaseContext databaseContext = new Models.DatabaseContext();
-
 //		var databaseContext = new Models.DatabaseContext();
+//		//Models.DatabaseContext databaseContext = new Models.DatabaseContext();
 //		// **************************************************
 
 //		// **************************************************
-//		//Models.Category category = new Models.Category();
-//		//category.Name = "My Category";
-
 //		var category =
 //			new Models.Category
 //			{
 //				Name = "My Category",
 //			};
+
+//		//Models.Category category = new Models.Category();
+//		//category.Name = "My Category";
 //		// **************************************************
 
+//		//databaseContext.Categories.Add(category);
 //		databaseContext.Categories.Add(entity: category);
 
 //		databaseContext.SaveChanges();
@@ -316,8 +316,7 @@ internal static class Program : object
 
 //		//try
 //		//{
-//		//	disposableObject =
-//		//		new DisposableClass();
+//		//	disposableObject = new();
 
 //		//	// با آن کار می‌کنیم
 //		//}
@@ -333,11 +332,7 @@ internal static class Program : object
 //		//}
 //		//finally
 //		//{
-//		//	if (disposableObject != null)
-//		//	{
-//		//		disposableObject.Dispose();
-//		//		//disposableObject = null;
-//		//	}
+//		//	disposableObject?.Dispose();
 //		//}
 //		// **************************************************
 
@@ -345,8 +340,7 @@ internal static class Program : object
 
 //		try
 //		{
-//			databaseContext =
-//				new Models.DatabaseContext();
+//			databaseContext = new();
 
 //			var category =
 //				new Models.Category
@@ -364,11 +358,24 @@ internal static class Program : object
 //		}
 //		finally
 //		{
-//			if (databaseContext != null)
-//			{
-//				databaseContext.Dispose();
-//				//databaseContext = null;
-//			}
+//			//if (databaseContext != null)
+//			//{
+//			//	databaseContext.Dispose();
+//			//	databaseContext = null;
+//			//}
+
+//			//if (databaseContext != null)
+//			//{
+//			//	databaseContext.Dispose();
+//			//	//databaseContext = null;
+//			//}
+
+//			//if (databaseContext is not null)
+//			//{
+//			//	databaseContext.Dispose();
+//			//}
+
+//			databaseContext?.Dispose();
 //		}
 //	}
 //}
@@ -398,8 +405,7 @@ internal static class Program : object
 
 //		try
 //		{
-//			databaseContext =
-//				new Models.DatabaseContext();
+//			databaseContext = new();
 
 //			var category =
 //				new Models.Category
@@ -429,12 +435,16 @@ internal static class Program : object
 //			// **************************************************
 
 //			// **************************************************
+//			// **************************************************
+//			// **************************************************
 //			//databaseContext.Categories.Add(entity: category);
 
 //			// Type: Microsoft.EntityFrameworkCore.ChangeTracking.EntityEntry
 //			//entityEntry =
 //			//	databaseContext.Categories.Add(entity: category);
+//			// **************************************************
 
+//			// **************************************************
 //			// New in EF Core
 //			//databaseContext.Add(entity: category);
 
@@ -442,6 +452,8 @@ internal static class Program : object
 //			// Type: Microsoft.EntityFrameworkCore.ChangeTracking.EntityEntry
 //			entityEntry =
 //				databaseContext.Add(entity: category);
+//			// **************************************************
+//			// **************************************************
 //			// **************************************************
 
 //			switch (entityEntry.State)
@@ -495,10 +507,7 @@ internal static class Program : object
 //		}
 //		finally
 //		{
-//			if (databaseContext != null)
-//			{
-//				databaseContext.Dispose();
-//			}
+//			databaseContext?.Dispose();
 //		}
 //	}
 //}
@@ -546,8 +555,7 @@ internal static class Program : object
 
 //		try
 //		{
-//			databaseContext =
-//				new Models.DatabaseContext();
+//			databaseContext = new();
 
 //			var category =
 //				new Models.Category
@@ -589,10 +597,9 @@ internal static class Program : object
 //		}
 //		finally
 //		{
-//			if (databaseContext != null)
+//			if (databaseContext is not null)
 //			{
 //				//databaseContext.Dispose();
-
 //				await databaseContext.DisposeAsync();
 //			}
 //		}
@@ -628,8 +635,7 @@ internal static class Program : object
 
 //		try
 //		{
-//			databaseContext =
-//				new Models.DatabaseContext();
+//			databaseContext = new();
 
 //			var category =
 //				new Models.Category
@@ -653,7 +659,7 @@ internal static class Program : object
 //		}
 //		finally
 //		{
-//			if (databaseContext != null)
+//			if (databaseContext is not null)
 //			{
 //				await databaseContext.DisposeAsync();
 //			}
@@ -666,8 +672,7 @@ internal static class Program : object
 
 //		try
 //		{
-//			databaseContext =
-//				new Models.DatabaseContext();
+//			databaseContext = new();
 
 //			// **************************************************
 //			// **************************************************
@@ -735,7 +740,7 @@ internal static class Program : object
 //			// **************************************************
 
 //			// **************************************************
-//			// اهمیت داشت، ولی در این نسخه اهمیتی ندارد Where and OrderBy در نسخه قدیم ترتیب نوشتن
+//			// اهمیت داشت، ولی در این نسخه اهمیتی ندارد Where and OrderBy در نسخه قدیم، ترتیب نوشتن
 //			// ولی اصولا عادت کنید که به شکل و به ترتیب ذیل بنویسید
 //			// **************************************************
 //			//var categories =
@@ -748,6 +753,9 @@ internal static class Program : object
 
 //			//foreach (var item in categories)
 //			//{
+//			//	//var message =
+//			//	//	$"Id: {item.Id} - Name: {item.Name}";
+
 //			//	var message =
 //			//		$"{nameof(item.Id)}: {item.Id} - {nameof(item.Name)}: {item.Name}";
 
@@ -780,6 +788,7 @@ internal static class Program : object
 //			// کلاسیک کار می‌کند  EF دقت کنید که دستور ذیل در نسخه
 //			// ولی در نسخه جدید کار نمی‌کند، لذا در
 //			// از آن استفاده نمی‌کنیم EF Core نسخه
+//			// **************************************************
 //			//var categories =
 //			//	await
 //			//	databaseContext.Categories
@@ -790,6 +799,7 @@ internal static class Program : object
 
 //			// **************************************************
 //			// باشد به خطا خواهد خورد null ،name دستور ذیل در شرایطی که
+//			// **************************************************
 //			//var categories =
 //			//	await
 //			//	databaseContext.Categories
@@ -808,7 +818,7 @@ internal static class Program : object
 //			// **************************************************
 
 //			// **************************************************
-//			//if (name != null)
+//			//if (name is not null)
 //			//{
 //			//	var categories =
 //			//		await
@@ -821,12 +831,14 @@ internal static class Program : object
 
 //			// **************************************************
 //			// دستور درست
-//			//if (name != null)
+//			// **************************************************
+//			//if (name is not null)
 //			//{
 //			//	var categories =
 //			//		await
 //			//		databaseContext.Categories
-//			//		.Where(predicate: current => current.Name != null &&
+//			//		.Where(predicate: current =>
+//			//			current.Name != null &&
 //			//			current.Name.ToLower() == name.ToLower())
 //			//		.ToListAsync()
 //			//		;
@@ -838,7 +850,7 @@ internal static class Program : object
 //			// **************************************************
 //			//name = "My";
 
-//			//if (name != null)
+//			//if (name is not null)
 //			//{
 //			//	var categories =
 //			//		await
@@ -863,7 +875,7 @@ internal static class Program : object
 //			// **************************************************
 //			//name = "Category";
 
-//			//if (name != null)
+//			//if (name is not null)
 //			//{
 //			//	var categories =
 //			//		await
@@ -888,7 +900,7 @@ internal static class Program : object
 //			// **************************************************
 //			//name = "Gory";
 
-//			//if (name != null)
+//			//if (name is not null)
 //			//{
 //			//	var categories =
 //			//		await
@@ -918,7 +930,7 @@ internal static class Program : object
 //		}
 //		finally
 //		{
-//			if (databaseContext != null)
+//			if (databaseContext is not null)
 //			{
 //				await databaseContext.DisposeAsync();
 //			}

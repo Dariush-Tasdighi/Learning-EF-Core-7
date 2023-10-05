@@ -74,7 +74,7 @@ Dependencies:
 
 
 
-	Microsoft.EntityFrameworkCore.Relational
+	<PackageReference Include="Microsoft.EntityFrameworkCore.Relational" Version="7.0.2" />
 
 		Microsoft.EntityFrameworkCore (>= 7.0.2)
 		Microsoft.Extensions.Configuration.Abstractions (>= 7.0.0)
