@@ -455,14 +455,14 @@ public class Category15 : object
 	/// این ویژگی فقط مربوط به برنامه می‌شود
 	/// </summary>
 
-	//[System.ComponentModel.DataAnnotations.RegularExpression
-	//	(pattern: "^\\d$")]
-
 	[System.ComponentModel.DataAnnotations.RegularExpression
-		(pattern: "^\\d{10}$")]
+		(pattern: "^\\d$")]
 
 	//[System.ComponentModel.DataAnnotations.RegularExpression
-	//	(pattern: "^\\d{3,8}$")]
+	//	(pattern: "^\\d{10}$")]
+
+	//[System.ComponentModel.DataAnnotations.RegularExpression
+	//	(pattern: "^\\d{10,12}$")]
 	public string? PostalCode { get; set; }
 	// **********
 
@@ -488,7 +488,7 @@ public class Category15 : object
 // *** Category 16 **********************************
 // **************************************************
 [System.ComponentModel.DataAnnotations.Schema.Table
-	(name: "CountriesTable")]
+	(name: "CategoriesTable")]
 public class Category16 : object
 {
 	public Category16(string name) : base()
@@ -500,7 +500,7 @@ public class Category16 : object
 	[System.ComponentModel.DataAnnotations.Key]
 
 	[System.ComponentModel.DataAnnotations.Schema.Column
-		(name: "CountryId")]
+		(name: "CategoryId")]
 	public int Id { get; set; }
 	// **********
 
@@ -512,7 +512,7 @@ public class Category16 : object
 		(maximumLength: 100, MinimumLength = 3)]
 
 	[System.ComponentModel.DataAnnotations.Schema.Column
-		(name: "CountryName")]
+		(name: "CategoryName")]
 	public string Name { get; set; }
 	// **********
 }
