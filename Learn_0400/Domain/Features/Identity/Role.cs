@@ -150,6 +150,11 @@ public class Role :
 
 	#region Collections
 
+	//public System.Collections.Generic.IList<User> Users { get; set; }
+	//public System.Collections.Generic.IList<User> Users { get; private set; }
+	/// <summary>
+	/// Lazy Loading
+	/// </summary>
 	public virtual System.Collections.Generic.IList<User> Users { get; private set; }
 
 	#endregion /Collections

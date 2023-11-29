@@ -1339,11 +1339,9 @@ public class User01 : object
 //[Microsoft.EntityFrameworkCore.Index
 //	(nameof(Username), IsUnique = true, Name = "Googooli")]
 
+// Note: Obsolete
 //[Microsoft.EntityFrameworkCore.Index
 //	(propertyNames: nameof(Username), IsUnique = true, Name = "Googooli")]
-
-//[Microsoft.EntityFrameworkCore.Index
-//	(nameof(FirstName), nameof(LastName), IsUnique = false)]
 
 // مدل نوشتن ذیل خطا می‌دهد
 //[Microsoft.EntityFrameworkCore.Index
@@ -1433,6 +1431,9 @@ public class User03 : object
 	// **********
 
 	// **********
+	//[System.ComponentModel.DataAnnotations.Range
+	//	(minimum: 1, maximum: 100000)]
+
 	[System.ComponentModel.DataAnnotations.Range
 		(minimum: 1, maximum: 100_000)]
 	public int Ordering { get; set; }
@@ -1556,9 +1557,16 @@ public class User05 : object
 
 	// **********
 	//[System.ComponentModel.DataAnnotations.Display
+	//	(Name = "Identity")]
+
+	//[System.ComponentModel.DataAnnotations.Display
+	//	(Name = "شناسه")]
+
+	//[System.ComponentModel.DataAnnotations.Display
 	//	(ResourceType = typeof(Resources.DataDictionary),
 	//	Name = "Id")]
 
+	// سوتی می‌دهم
 	//[System.ComponentModel.DataAnnotations.Display
 	//	(ResourceType = typeof(Resources.DataDictionary),
 	//	Name = "Idd")]
