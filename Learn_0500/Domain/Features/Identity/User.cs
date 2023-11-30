@@ -8,9 +8,11 @@ public class User : Seedwork.Entity
 	}
 
 	public int RoleId { get; set; }
+
 	public virtual Role? Role { get; set; }
 
 	public int Ordering { get; set; }
+
 	public bool IsActive { get; set; }
 
 	[System.ComponentModel.DataAnnotations.MaxLength

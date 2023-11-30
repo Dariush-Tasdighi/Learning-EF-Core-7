@@ -11,6 +11,7 @@ public class State : Seedwork.Entity
 	}
 
 	public int CountryId { get; set; }
+
 	public virtual Country? Country { get; set; }
 
 	public int Code { get; set; }
