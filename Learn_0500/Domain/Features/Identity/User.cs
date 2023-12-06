@@ -11,6 +11,8 @@ public class User : Seedwork.Entity
 
 	public virtual Role? Role { get; set; }
 
+	public int Age { get; set; }
+
 	public int Ordering { get; set; }
 
 	public bool IsActive { get; set; }
@@ -18,4 +20,8 @@ public class User : Seedwork.Entity
 	[System.ComponentModel.DataAnnotations.MaxLength
 		(length: 20)]
 	public string? Username { get; set; }
+
+	[System.ComponentModel.DataAnnotations.MaxLength
+		(length: 50)]
+	public string? FullName { get; set; }
 }

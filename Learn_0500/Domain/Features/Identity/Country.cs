@@ -16,6 +16,8 @@ public class Country : Seedwork.Entity
 
 	public int HealthyRate { get; set; }
 
+	public bool IsActive { get; set; }
+
 	[System.ComponentModel.DataAnnotations.MaxLength
 		(length: 20)]
 	public string Name { get; set; }

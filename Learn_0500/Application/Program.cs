@@ -1,8 +1,6 @@
-﻿using System.Diagnostics.Metrics;
-using System.Linq;
+﻿using System.Linq;
 using Domain.Features.Identity;
 using Microsoft.EntityFrameworkCore;
-using static System.Net.Mime.MediaTypeNames;
 
 namespace Application;
 
@@ -362,14 +360,22 @@ internal static class Program : object
 			// **************************************************
 			// Note: دقت کنيد که دستور ذيل کار نمی کند
 			// **************************************************
-			var search = "علی علوی";
-
-			search =
-				search.Replace(" ", "%"); // "علی%علوی"
-
-			// "SELECT * FROM Countries WHERE Name LIKE '%علی%علوی%'"
-
 			{
+				var search = "علی علوی";
+
+				search =
+					search.Replace(" ", "%"); // "علی%علوی"
+
+				// "SELECT * FROM Countries WHERE Name LIKE '%علی%علوی%'"
+			}
+			// **************************************************
+
+			// **************************************************
+			// Dynamic Search: Introduction
+			// **************************************************
+			{
+				var search = "علی علوی";
+
 				var countries =
 					await
 					databaseContext.Countries
@@ -379,23 +385,41 @@ internal static class Program : object
 			}
 
 			{
+				var search = "علی علوی";
+
+				var keywords =
+					search.Split(separator: ' ');
+
+				//var countries =
+				//	await
+				//	databaseContext.Countries
+				//	.Where(current => current.Name.ToLower().Contains("علی".ToLower()))
+				//	.Where(current => current.Name.ToLower().Contains("علوی".ToLower()))
+				//	.ToListAsync()
+				//	;
+
 				var countries =
 					await
 					databaseContext.Countries
-					.Where(current => current.Name.ToLower().Contains("علی".ToLower()))
-					.Where(current => current.Name.ToLower().Contains("علوی".ToLower()))
+					.Where(current => current.Name.ToLower().Contains(keywords[0].ToLower()))
+					.Where(current => current.Name.ToLower().Contains(keywords[1].ToLower()))
 					.ToListAsync()
 					;
 			}
 
 			{
+				var search = "علی علوی";
+
+				var keywords =
+					search.Split(separator: ' ');
+
 				var countries =
 					await
 					databaseContext.Countries
 					.Where(current =>
-						current.Name.ToLower().Contains("علی".ToLower())
+						current.Name.ToLower().Contains(keywords[0].ToLower())
 						||
-						current.Name.ToLower().Contains("علوی".ToLower()))
+						current.Name.ToLower().Contains(keywords[1].ToLower()))
 					.ToListAsync()
 					;
 			}
@@ -799,7 +823,7 @@ internal static class Program : object
 				var city =
 					await
 					databaseContext.Cities
-					.Include("State")
+					.Include(navigationPropertyPath: "State")
 					.Where(current => current.Code == 10)
 					.FirstOrDefaultAsync();
 
@@ -819,8 +843,8 @@ internal static class Program : object
 				var city =
 					await
 					databaseContext.Cities
-					.Include("State")
-					.Include("State.Country")
+					.Include(navigationPropertyPath: "State")
+					.Include(navigationPropertyPath: "State.Country")
 					.Where(current => current.Code == 10)
 					.FirstOrDefaultAsync();
 
@@ -883,7 +907,7 @@ internal static class Program : object
 			// من همه کشورهايی را می‌خواهم که
 			// لااقل در نام يکی از استان‌های آن، حرف {بی} وجود داشته باشد
 			// لااقل = Any
-
+			// **************************************************
 			{
 				// Solution (1)
 				var countries =
@@ -1015,6 +1039,459 @@ internal static class Program : object
 
 				countryCount =
 					databaseContext.Countries.Local.Count;
+			}
+			// **************************************************
+
+			// **************************************************
+			// Dynamic Search:
+			// **************************************************
+			{
+				// **************************************************
+				//string? countryName = null;
+				//string? countryCodeTo = null;
+				//string? countryCodeFrom = null;
+				// OR
+				//string? countryName = "Iran";
+				//string? countryCodeTo = null;
+				//string? countryCodeFrom = null;
+				// OR
+				//string? countryName = null;
+				//string? countryCodeTo = "10";
+				//string? countryCodeFrom = null;
+				// OR
+				string? countryName = "Iran";
+				string? countryCodeTo = "10";
+				string? countryCodeFrom = null;
+				// OR
+				// Up to 8 States!
+				// **************************************************
+
+				//var data =
+				//	databaseContext.Countries
+				//		.Where(current => current.IsActive)
+				//		;
+
+				//var data =
+				//	databaseContext.Countries
+				//		.Where(current => 1 == 1)
+				//		;
+
+				var data =
+					databaseContext.Countries
+					.AsQueryable()
+					;
+
+				if (string.IsNullOrWhiteSpace(value: countryName) == false)
+				{
+					data =
+						data
+						.Where(current =>
+							current.Name.ToLower()
+							.Contains(countryName.ToLower()));
+				}
+
+				if (string.IsNullOrWhiteSpace(value: countryCodeFrom) == false)
+				{
+					// Note: Wrong Usage!
+					//data =
+					//	data
+					//	.Where(current => current.Code >=
+					//		System.Convert.ToInt32(countryCodeFrom));
+
+					int countryCodeFromInt =
+						System.Convert.ToInt32(value: countryCodeFrom);
+
+					data =
+						data
+						.Where(current => current.Code >= countryCodeFromInt);
+				}
+
+				if (string.IsNullOrWhiteSpace(value: countryCodeTo) == false)
+				{
+					int countryCodeToInt =
+						System.Convert.ToInt32(value: countryCodeTo);
+
+					data =
+						data
+						.Where(current => current.Code >= countryCodeToInt);
+				}
+
+				data =
+					data
+					.OrderBy(current => current.Id);
+
+				//data
+				//	.Load();
+
+				// يا
+
+				// Note: Wrong Usage!
+				//data =
+				//	data.ToList();
+
+				var result =
+					data.ToList();
+			}
+			// **************************************************
+
+			// **************************************************
+			{
+				var search =
+					"   Ali       Reza  Iran Carpet   Ali         ";
+
+				// یه جوری
+				//string[] keywords =
+				//	{ "Ali", "Reza", "Iran", "Carpet" };
+
+				var keywords =
+					new string[] { "Ali", "Reza", "Iran", "Carpet" };
+
+				var dataTemp =
+					databaseContext.Countries
+					.AsQueryable();
+
+				foreach (var keyword in keywords)
+				{
+					dataTemp =
+						dataTemp
+						.Where(current => current.Name
+							.ToLower().Contains(keyword.ToLower()));
+				}
+
+				dataTemp =
+					dataTemp
+					.OrderBy(current => current.Code)
+					;
+
+				var dataResult =
+					dataTemp.ToList();
+			}
+			// **************************************************
+
+			// **************************************************
+			{
+				var search =
+					"   Ali       Reza  Iran Carpet   Ali         ";
+
+				//search = "Ali       Reza  Iran Carpet   Ali";
+				search =
+					search.Trim();
+
+				//search = "Ali Reza Iran Carpet Ali";
+				while (search.Contains(value: "  "))
+				{
+					search = search.Replace
+						(oldValue: "  ", newValue: " ");
+				}
+
+				// keywords: ["Ali", "Reza", "Iran", "Carpet", "Ali"]
+				//var keywords =
+				//	search.Split(separator: ' ');
+
+				// keywords: ["Ali", "Reza", "Iran", "Carpet"]
+				var keywords =
+					search.Split(separator: ' ').Distinct();
+
+				var dataTemp =
+					databaseContext.Countries
+					.AsQueryable();
+
+				foreach (var keyword in keywords)
+				{
+					dataTemp =
+						dataTemp
+						.Where(current => current.Name
+							.ToLower().Contains(keyword.ToLower()));
+				}
+
+				dataTemp =
+					dataTemp
+					.OrderBy(current => current.Code)
+					;
+
+				var dataResult =
+					dataTemp.ToList();
+			}
+			// **************************************************
+
+			// **************************************************
+			{
+				var search =
+					"   Ali       Reza  Iran Carpet   Ali         ";
+
+				search =
+					search.Trim();
+
+				while (search.Contains(value: "  "))
+				{
+					search = search.Replace
+						(oldValue: "  ", newValue: " ");
+				}
+
+				var keywords =
+					search.Split(separator: ' ').Distinct();
+
+				var dataTemp =
+					databaseContext.Countries
+					.AsQueryable();
+
+				// Mr. Farshad Rabiei
+				// دستور ذیل باید چک شود
+				dataTemp =
+					dataTemp.Where(current => keywords.Contains(current.Name));
+
+				dataTemp =
+					dataTemp
+					.OrderBy(current => current.Code)
+					;
+
+				var dataResult =
+					dataTemp.ToList();
+			}
+			// **************************************************
+
+			// **************************************************
+			// Learning Traditional LINQ
+			// **************************************************
+			// دستورات ذيل کاملا با هم معادل هستند
+			// **************************************************
+			{
+				databaseContext.Countries
+					.Load();
+
+				// databaseContext.Countries.Local
+			}
+
+			{
+				var data1 =
+					databaseContext.Countries
+					.ToList()
+					;
+			}
+
+			{
+				var data2 =
+					from Country in databaseContext.Countries
+					select Country
+					;
+			}
+			// **************************************************
+			// SELECT * FROM Countries
+			// **************************************************
+
+			// **************************************************
+			// ها Country آرایه‌ای از
+			// **************************************************
+			{
+				var data =
+					from Country in databaseContext.Countries
+					where Country.Name.ToLower().Contains("Iran".ToLower())
+					select Country
+					;
+			}
+			// **************************************************
+
+			// **************************************************
+			// ها Country آرایه‌ای از
+			// **************************************************
+			{
+				var data =
+					from Country in databaseContext.Countries
+					where Country.Name.ToLower().Contains("Iran".ToLower())
+					orderby Country.Name
+					select Country
+					;
+
+				foreach (var currentCountry in data)
+				{
+					System.Console.WriteLine
+						(value: currentCountry.Name);
+				}
+			}
+			// **************************************************
+
+			// **************************************************
+			// (A)
+			// ها string آرایه‌ای از
+			// **************************************************
+			{
+				var data =
+					from Country in databaseContext.Countries
+					where Country.Name.ToLower().Contains("Iran".ToLower())
+					orderby Country.Name
+					select Country.Name
+					;
+
+				// Select Name From Countries
+
+				foreach (var currentCountryName in data)
+				{
+					System.Console.WriteLine
+						(value: currentCountryName);
+				}
+			}
+			// **************************************************
+
+			// **************************************************
+			// Note: See Learning Anonymous Object File!
+			// **************************************************
+
+			// **************************************************
+			// (B)
+			// ها object آرایه‌ای از
+			// **************************************************
+			{
+				var data =
+					from Country in databaseContext.Countries
+					where Country.Name.ToLower().Contains("Iran".ToLower())
+					orderby Country.Name
+					select new { Name = Country.Name }
+					;
+
+				foreach (var currentPartialCountry in data)
+				{
+					System.Console.WriteLine
+						(value: currentPartialCountry.Name);
+				}
+			}
+			// **************************************************
+
+			// **************************************************
+			{
+				var data =
+					from Country in databaseContext.Countries
+					where Country.Name.ToLower().Contains("Iran".ToLower())
+					orderby Country.Name
+					select new { Country.Name }
+					//select new { Name = Country.Name }
+					;
+
+				foreach (var currentPartialCountry in data)
+				{
+					System.Console.WriteLine
+						(value: currentPartialCountry.Name);
+				}
+			}
+			// **************************************************
+
+			// **************************************************
+			// (C)
+			// **************************************************
+			{
+				var data =
+					from Country in databaseContext.Countries
+					where Country.Name.Contains("Iran")
+					orderby Country.Name
+					select new { Baghali = Country.Name }
+					;
+
+				foreach (var currentPartialCountry in data)
+				{
+					System.Console.WriteLine
+						(value: currentPartialCountry.Baghali);
+				}
+			}
+			// **************************************************
+
+			// **************************************************
+			{
+				var data =
+					from Country in databaseContext.Countries
+					where Country.Name.Contains("Iran")
+					orderby Country.Name
+					select new { Size = Country.Population, Country.Name }
+					;
+
+				foreach (var currentPartialCountry in data)
+				{
+					System.Console.WriteLine
+						(value: currentPartialCountry.Name);
+				}
+			}
+			// **************************************************
+
+			// **************************************************
+			// (D1)
+			// **************************************************
+			{
+				var data =
+					from Country in databaseContext.Countries
+					where Country.Name.Contains("Iran")
+					orderby Country.Name
+					select (new ViewModels.CountryViewModel1() { NewName = Country.Name })
+					;
+
+				foreach (var currentCountryViewModel in data)
+				{
+					currentCountryViewModel.NewName += "!";
+
+					System.Console.WriteLine
+						(value: currentCountryViewModel.NewName);
+				}
+			}
+			// **************************************************
+
+			// **************************************************
+			// (D2)
+			// **************************************************
+			{
+				var data =
+					from Country in databaseContext.Countries
+					where Country.Name.Contains("Iran")
+					orderby Country.Name
+					select (new ViewModels.CountryViewModel2() { Name = Country.Name })
+					;
+
+				foreach (var currentCountryViewModel in data)
+				{
+					currentCountryViewModel.Name += "!";
+
+					System.Console.WriteLine
+						(value: currentCountryViewModel.Name);
+				}
+			}
+			// **************************************************
+
+			// **************************************************
+			// (D3)
+			// Note: Wrong Usage!
+			// **************************************************
+			//{
+			//	var data =
+			//		from Country in databaseContext.Countries
+			//		where Country.Name.Contains("Iran")
+			//		orderby Country.Name
+			//		select (new ViewModels.CountryViewModel2() { Country.Name })
+			//		;
+
+			//	foreach (var currentCountryViewModel in data)
+			//	{
+			//		currentCountryViewModel.Name += "!";
+
+			//		System.Console.WriteLine
+			//			(value: currentCountryViewModel.Name);
+			//	}
+			//}
+			// **************************************************
+
+			// **************************************************
+			// (E)
+			// Note: متاسفانه دستور ذیل کار نمی کند
+			// **************************************************
+			{
+				var data =
+					from Country in databaseContext.Countries
+					where Country.Name.Contains("Iran")
+					orderby Country.Name
+					select new Domain.Features.Identity.Country(Country.Name)
+					//select new Domain.Features.Identity.Country() { Name = Country.Name }
+					;
+
+				foreach (var currentCountry in data)
+				{
+					System.Console.WriteLine
+						(value: currentCountry.Name);
+				}
 			}
 			// **************************************************
 		}
