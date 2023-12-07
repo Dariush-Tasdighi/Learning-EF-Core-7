@@ -44,13 +44,13 @@ public class SomeClass : object
 
 		// **************************************************
 		var employee1 =
-			new { Salary = 10000, FullName = person2.FullName };
+			new { Salary = 10_000, FName = person2.FullName };
 
 		var employee2 =
-			new { Salary = 10000, person2.FullName };
+			new { Salary = 10_000, FullName = person2.FullName };
 
 		var employee3 =
-			new { Salary = 10000, FatherName = person2.FullName };
+			new { Salary = 10_000, person2.FullName };
 		// **************************************************
 	}
 }

@@ -6,7 +6,8 @@ public abstract class Entity : object
 	{
 	}
 
-	[System.ComponentModel.DataAnnotations.Schema.DatabaseGenerated(databaseGeneratedOption:
+	[System.ComponentModel.DataAnnotations.Schema
+		.DatabaseGenerated(databaseGeneratedOption:
 		System.ComponentModel.DataAnnotations.Schema.DatabaseGeneratedOption.Identity)]
-	public int Id { get; private set; }
+	public int Id { get; set; }
 }
