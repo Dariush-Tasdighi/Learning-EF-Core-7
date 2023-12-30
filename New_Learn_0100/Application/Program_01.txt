@@ -1,0 +1,96 @@
+﻿**************************************************
+چگونه این دوره را ببینیم و یاد بگیریم؟
+**************************************************
+
+**************************************************
+تفاوت این دوره با دوره قبل؟
+**************************************************
+
+**************************************************
+در این دوره، کلی نکات شیء‌گرایی و سی‌شارپ نیز یاد خواهیم گرفت
+خصوصا نکات هیجان‌انگیزی که در دات‌نت ۸ اضافه شده است
+**************************************************
+
+**************************************************
+EF Core:
+
+نام کامل:
+
+LINQ to Entity Framework Core Code First!
+**************************************************
+
+**************************************************
+تاریخچه
+**************************************************
+DAO: Data Access Object							(Database First)
+ADO: ActiveX Data Object						(Database First)
+ADO.NET: ActiveX Data Object in .NET Framework	(Database First)
+
+	DataSet
+	TypedDataSet
+
+1390 (شمسی):
+
+	ORM: Object-relational Mapper
+
+		In JAVA:
+
+			Hibernate
+
+		In C#:
+
+			LLBLGEN
+			Sub Sonic
+			NHibernate
+			EF
+
+	EF											(Database First)
+	EF											(Model First)
+	EF											(Code First!!!)
+
+	EF.Core										(Code First) -> فوق‌العاده سریع‌تر
+
+	امکانات عجیب غریب
+
+		Domain Driven Design -> DDD
+**************************************************
+
+**************************************************
+چیست؟ EF Core اگر یکی پرسید مهم‌ترین دلایل استفاده از
+
+1. Auto Mapping
+2. Independent Database Provider
+
+	Database Providers تنوع
+
+		SQL Server
+		SQLite
+		Oracle
+		MySQL
+		InMemory!!!
+		...
+
+3. SQL Injection Free (Dapper برخلاف)
+**************************************************
+
+**************************************************
+در صورتی که در هنگام ایجاد
+یک پروژه، گزینه ذیل را غیر فعال کنیم
+Do not use top-level statesments
+**************************************************
+
+**************************************************
+Update:
+	Application.csproj:
+
+		<Project Sdk="Microsoft.NET.Sdk">
+
+			<PropertyGroup>
+				<Nullable>enable</Nullable>
+				<OutputType>Exe</OutputType>
+				<TargetFramework>net8.0</TargetFramework>
+				<!--<ImplicitUsings>enable</ImplicitUsings>-->
+			</PropertyGroup>
+
+		</Project>
+**************************************************
