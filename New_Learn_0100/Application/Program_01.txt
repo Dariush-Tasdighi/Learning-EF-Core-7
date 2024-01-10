@@ -112,19 +112,3 @@ ADO.NET: ActiveX Data Object in .NET Framework	(Database First)
 یک پروژه، گزینه ذیل را غیر فعال کنیم
 Do not use top-level statesments
 **************************************************
-
-**************************************************
-Update:
-	Application.csproj:
-
-		<Project Sdk="Microsoft.NET.Sdk">
-
-			<PropertyGroup>
-				<Nullable>enable</Nullable>
-				<OutputType>Exe</OutputType>
-				<TargetFramework>net8.0</TargetFramework>
-				<!--<ImplicitUsings>enable</ImplicitUsings>-->
-			</PropertyGroup>
-
-		</Project>
-**************************************************
