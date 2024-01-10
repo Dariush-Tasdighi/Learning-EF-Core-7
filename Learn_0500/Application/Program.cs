@@ -1140,8 +1140,8 @@ internal static class Program : object
 
 			// **************************************************
 			{
-				var search =
-					"   Ali       Reza  Iran Carpet   Ali         ";
+				//var search =
+				//	"   Ali       Reza  Iran Carpet   Ali         ";
 
 				// یه جوری
 				//string[] keywords =

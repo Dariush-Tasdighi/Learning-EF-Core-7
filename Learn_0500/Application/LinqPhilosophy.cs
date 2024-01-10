@@ -10,8 +10,8 @@ public static class LinqPhilosophy : object
 
 	public static void WorkinngOnDatabase()
 	{
-		var query =
-			"SELECT * FROM Users WHERE Age >= 25 AND Age <= 35 ORDER BY FullName ASC";
+		//var query =
+		//	"SELECT * FROM Users WHERE Age >= 25 AND Age <= 35 ORDER BY FullName ASC";
 
 		// ارسال به بانک اطلاعاتی برای بدست آوردن اطلاعات اشخاص
 	}
