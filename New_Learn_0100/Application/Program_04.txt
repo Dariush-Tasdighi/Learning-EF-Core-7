@@ -1,311 +1,325 @@
 ﻿**************************************************
-(Solution Folder)
-[[Class Library / Project]]
-[Folder Name]
-**************************************************
+Person person = new Person();
 
-**************************************************
-Sample:
+person.Age = 51;
+person.FullName = "Dariush Tasdighi";
+person.ShowInformation();
 
-	(src)
-
-		[[Application]]
-
-			[Models]
-**************************************************
-
-**************************************************
-آموزش یک تناظر ساده
-**************************************************
-Table (1..N)				Database (1..1)
-
-DataTable (1..N)			DataSet (1..1)
-
-Model / Entity (1..N)		DatabaseContext (1..1)
-**************************************************
-
-**************************************************
-تاریخچه دسته‌بندی پروژه‌ها
-**************************************************
-
-**************************************************
-[[EShop]]
-
-	[Models]
-
-		Product.cs
-		DatabaseContext.cs
-**************************************************
-
-**************************************************
-[[EShop]]
-
-[[Models]]
-
-	Product.cs
-	DatabaseContext.cs
-**************************************************
-
-**************************************************
-[[EShop]]
-
-[[Models]]
-
-	Product.cs
-	DatabaseContext.cs
-**************************************************
-
-**************************************************
-استاندارد نامگذاری
-**************************************************
-System.IO
-System.Guid
-
-DTX  -> Dtx
-DTAT -> Dtat
-**************************************************
-
-**************************************************
-[[EShop]]
-
-[[Models]]
-
-	Product.cs
-
-[[DAL, Dal, DataAccess, DataAccessLayer, Data]]
-
-	DatabaseContext.cs
-**************************************************
-
-**************************************************
-[[EShop]]
-
-[[Domain]]
-
-	Product.cs
-
-[[Persistance]]
-
-	DatabaseContext.cs
-**************************************************
-
-**************************************************
-Standards & DataAnnotations:
-	We can use a lot of 'DataAnnotations' without install any Nugets!
-**************************************************
-
-**************************************************
-Standards without any DataAnnotations!
-**************************************************
-// Best Practice
-public int Id { get; set; }
-
-public int ID { get; set; }
-
-public int ProductId { get; set; }
-
-public int ProductID { get; set; }
-**************************************************
-
-**************************************************
-When we should use DataAnnotations!
-**************************************************
-// Error!
-public int Code { get; set; }
-
-[System.ComponentModel.DataAnnotations.Key]
-public int Code { get; set; }
-**************************************************
-
-**************************************************
-public int Id { get; set; }
-
-public long Id { get; set; }
-
-// Best Practice
-public System.Guid Id { get; set; }
-**************************************************
-
-**************************************************
-فلسفه لینک
-LINQ Philosophy
-**************************************************
-
-**************************************************
-قدیما
-**************************************************
-- Database:
-
-sql = "SELECT * FROM Users Where Age > 20";
-**************************************************
-
-**************************************************
-- C# Objects:
-
-var currentDirectory =
-	new System.IO.DirectoryInfo(path: "C:\\Windows");
-
-var files =
-	currentDirectory.GetFiles();
-
-foreach (var file in files)
+public class Person
 {
-	if (file.Length > 20)
+	public int Age { get; set; }
+
+	public string FullName { get; set; }
+
+	public void ShowInformation()
 	{
-		System.Console.WriteLine(value: file.Name);
+		System.Console.WriteLine
+			($"I'm {FullName} and {Age} years old.");
 	}
 }
 **************************************************
 
 **************************************************
-- XML Nodes:
+Person person = new Person();
 
-...
-**************************************************
+person.Age = 51;
+person.FullName = "Dariush Tasdighi";
+person.ShowInformation();
 
-**************************************************
-جدیدا
-**************************************************
-using System.Linq;
-
-var users =
-	databaseContext.Users
-	.Where(current => current.Age > 20)
-	.ToList()
-	;
-
-var users =
-	databaseContext.Users
-	.Where(current => current.Age > 20)
-	.OrderBy(current => current.FullName)
-	.ToList()
-	;
-
-foreach (var user in users)
+public class Person : [[[object]]]
 {
-	System.Console.WriteLine(value: user.FullName);
-}
-**************************************************
-
-**************************************************
-using System.Linq;
-
-var currentDirectory =
-	new System.IO.DirectoryInfo(path: "C:\\Windows");
-
-var files =
-	currentDirectory.GetFiles();
-	.Where(current => current.Length > 20)
-	.ToList()
-	;
-
-var files =
-	currentDirectory.GetFiles();
-	.Where(current => current.Length > 20)
-	.OrderBy(current => current.Name)
-	.ToList()
-	;
-
-foreach (var file in files)
-{
-	System.Console.WriteLine(value: file.Name);
-}
-**************************************************
-
-**************************************************
-Sample Model (Entity): Category
-**************************************************
-
-**************************************************
-namespace Models
-{
-	public class Category
+	[[[
+	public Person() : base()
 	{
-		/// <summary>
-		/// Primary Key -> Unique (منحصر به فرد)
-		/// </summary>
-		public int Id { get; set; }
+	}
+	]]]
 
-		public string Name { get; set; }
+	public int Age { get; set; }
+
+	public string FullName { get; set; }
+
+	public void ShowInformation()
+	{
+		System.Console.WriteLine
+			($"I'm {FullName} and {Age} years old.");
 	}
 }
 **************************************************
 
 **************************************************
-POCO -> Plain Old CLR Objects
+الزامی است FullName فرض کنید که
 **************************************************
-namespace Models
+[[[
+//Person person = new Person();
+Person person = new Person(fullName: "Dariush Tasdighi");
+]]]
+
+person.Age = 51;
+
+[[[
+//person.FullName = "Dariush Tasdighi";
+]]]
+
+person.ShowInformation();
+
+public class Person : object
 {
-	public class Category : BaseEntity
+	[[[
+	public Person(string fullName) : base()
 	{
-		public string Name { get; set; }
+		FullName = fullName;
+	}
+	]]]
+
+	public int Age { get; set; }
+
+	public string FullName { get; set; }
+
+	public void ShowInformation()
+	{
+		System.Console.WriteLine
+			($"I'm {FullName} and {Age} years old.");
 	}
 }
 **************************************************
 
 **************************************************
-namespace Models;
+تفکری که یک زمانی اوکی بود ولی به دلیلی که در ادامه
+خواهم گفت، دیگر روش خوبی نمی‌باشد
+**************************************************
+فرض کنید که در کلاس شخص، ما ۱۰۰ فیلد یا پراپرتی داریم
+و دو تا از آن‌ها خیلی مهم و پرکاربرد می‌باشد
 
-public class Category
+                         2
+(2,0) + (2,1) + (2,2) = 2  = 4 حالت
+**************************************************
+Person person1 = new Person();
+Person person2 = new Person(age: 51);
+Person person3 = new Person(fullName: "Dariush Tasdighi");
+Person person4 = new Person(fullName: "Dariush Tasdighi", age: 51);
+
+public class Person : object
 {
-	public int Id { get; set; }
+	public Person() : base()
+	{
+	}
 
-	public string Name { get; set; }
+	public Person(int age) : base()
+	{
+		Age = age;
+	}
+
+	public Person(string fullName) : base()
+	{
+		FullName = fullName;
+	}
+
+	public Person(string fullName, int age) : base()
+	{
+		Age = age;
+		FullName = fullName;
+	}
+
+	public int Age { get; set; }
+
+	public string FullName { get; set; }
+
+	public void ShowInformation()
+	{
+		System.Console.WriteLine
+			($"I'm {FullName} and {Age} years old.");
+	}
 }
 **************************************************
 
 **************************************************
-قانون مهم
-هر آن‌چه ننویسیم، کامپایلر آن‌را می‌نویسید
-و یا برداشت می‌کند را به صراحت می‌نویسیم
-**************************************************
-namespace Models;
+ولی به دلیل ویژگی جذابی که در ادامه گفته می‌شود
+نگاه فوق، دیگر حرفه‌ای نمی‌باشد
 
-public class Category : object
+پس
+
+اگر هیچ فیلد الزامی نداریم، صرفا و فقط از
+Default Constructor
+استفاده می‌کنیم
+
+و اگر مثلا دو فیلد الزامی داشته باشیم، صرفا و فقط از یک
+Constructor Overload
+ای استفاده می‌کنیم که هر دو پراپرتری را در بر داشته باشد
+**************************************************
+
+**************************************************
+طریقه حرفه‌ای ساخت شیء
+**************************************************
+// **********
+//Person person = new Person();
+//person.Age = 51;
+//person.FullName = "Dariush Tasdighi";
+// **********
+
+// **********
+//Person person = new Person() { FullName = "Dariush Tasdighi", Age = 5 };
+// **********
+
+// **********
+//Person person =
+//	new Person()
+//	{
+//		FullName = "Dariush Tasdighi",
+//		Age = 5
+//	};
+// **********
+
+// **********
+//Person person =
+//	new()
+//	{
+//		FullName = "Dariush Tasdighi",
+//		Age = 5
+//	};
+// **********
+
+// **********
+//var person =
+//	new Person()
+//	{
+//		FullName = "Dariush Tasdighi",
+//		Age = 5
+//	};
+// **********
+
+// **********
+//var person =
+//	new Person
+//	{
+//		FullName = "Dariush Tasdighi",
+//		Age = 5
+//	};
+// **********
+
+// **********
+//var person =
+//	new Person
+//	{
+//		FullName = "Dariush Tasdighi",
+//		Age = 5,
+//	};
+// **********
+
+// **********
+var person =
+	new Person
+	{
+		Age = 5,
+		FullName = "Dariush Tasdighi",
+	};
+// **********
+
+public class Person : object
 {
-	public Category() : base()
+	public Person() : base()
 	{
 	}
 
-	public int Id { get; set; }
+	public int Age { get; set; }
 
-	public string Name { get; set; }
+	public string FullName { get; set; }
+
+	public void ShowInformation()
+	{
+		System.Console.WriteLine
+			($"I'm {FullName} and {Age} years old.");
+	}
 }
 **************************************************
 
 **************************************************
 Nullable in .NET 6.x
 **************************************************
-
-**************************************************
-namespace Models;
-
-public class Category : object
+public class Person : object
 {
-	//public Category() : base()
-	//{
-	//}
-
-	public Category(string name) : base()
+	public Person() : base()
 	{
-		Name = name;
 	}
 
-	public int Id { get; set; }
+	public int Age { get; set; }
 
-	public string Name { get; set; }
+	public string? FullName { get; set; }
+
+	public void ShowInformation()
+	{
+		System.Console.WriteLine
+			($"I'm {FullName} and {Age} years old.");
+	}
+}
+
+public class Person : object
+{
+	public Person(string fullName) : base()
+	{
+		FullName = fullName;
+	}
+
+	public int Age { get; set; }
+
+	public string FullName { get; set; }
+
+	public void ShowInformation()
+	{
+		System.Console.WriteLine
+			($"I'm {FullName} and {Age} years old.");
+	}
+}
+**************************************************
+
+**************************************************
+جمع‌بندی موارد تا قبل از دات‌نت نسخه ۸
+**************************************************
+var person =
+	new Person(fullName: "Dariush Tasdighi")
+	{
+		Age = 51,
+	};
+
+public class Person : object
+{
+	public Person(string fullName) : base()
+	{
+		FullName = fullName;
+	}
+
+	public int Age { get; set; }
+
+	public string FullName { get; set; }
+
+	public void ShowInformation()
+	{
+		System.Console.WriteLine
+			($"I'm {FullName} and {Age} years old.");
+	}
 }
 **************************************************
 
 **************************************************
 Primary Constructor in .NET 8.x
 **************************************************
-namespace Models;
+var person =
+	new Person(fullName: "Dariush Tasdighi")
+	{
+		Age = 51,
+	};
 
-public class Category(string name) : object()
+person.ShowInformation();
+
+public class Person(string fullName) : object
 {
-	public int Id { get; set; }
+	public int Age { get; set; }
 
-	public string Name { get; set; } = name;
+	public string FullName { get; set; } = fullName;
+
+	public void ShowInformation()
+	{
+		System.Console.WriteLine
+			($"I'm {FullName} and {Age} years old.");
+	}
 }
 **************************************************
