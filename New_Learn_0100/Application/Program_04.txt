@@ -3,6 +3,7 @@ Person person = new Person();
 
 person.Age = 51;
 person.FullName = "Dariush Tasdighi";
+
 person.ShowInformation();
 
 public class Person
@@ -24,6 +25,7 @@ Person person = new Person();
 
 person.Age = 51;
 person.FullName = "Dariush Tasdighi";
+
 person.ShowInformation();
 
 public class Person : [[[object]]]
@@ -206,6 +208,8 @@ Constructor Overload
 // **********
 
 // **********
+// Best Practice
+// **********
 var person =
 	new Person
 	{
@@ -223,6 +227,37 @@ public class Person : object
 	public int Age { get; set; }
 
 	public string FullName { get; set; }
+
+	public void ShowInformation()
+	{
+		System.Console.WriteLine
+			($"I'm {FullName} and {Age} years old.");
+	}
+}
+**************************************************
+
+**************************************************
+// **********
+// Best Practice
+// **********
+var person =
+	new Person(fullName: "Dariush Tasdighi")
+	{
+		Age = 51,
+	};
+
+public class Person : object
+{
+	public Person(string fullName) : base()
+	{
+		FullName = fullName;
+	}
+
+	public int Age { get; set; }
+
+	public string FullName { get; set; }
+
+	// 98 Other Properties
 
 	public void ShowInformation()
 	{
