@@ -1,4 +1,12 @@
 ﻿**************************************************
+**************************************************
+**************************************************
+*** Session 6 ************************************
+**************************************************
+**************************************************
+**************************************************
+
+**************************************************
 (Solution Folder)
 [[Class Library / Project]]
 [Folder Name]
@@ -33,7 +41,9 @@ Model / Entity (1..N)		DatabaseContext (1..1)
 
 	[Models]
 
+		User.cs
 		Product.cs
+
 		DatabaseContext.cs
 **************************************************
 
@@ -42,16 +52,9 @@ Model / Entity (1..N)		DatabaseContext (1..1)
 
 [[Models]]
 
+	User.cs
 	Product.cs
-	DatabaseContext.cs
-**************************************************
 
-**************************************************
-[[EShop]]
-
-[[Models]]
-
-	Product.cs
 	DatabaseContext.cs
 **************************************************
 
@@ -61,6 +64,7 @@ Model / Entity (1..N)		DatabaseContext (1..1)
 System.IO
 System.Guid
 
+DAL  -> Dal
 DTX  -> Dtx
 DTAT -> Dtat
 **************************************************
@@ -70,9 +74,10 @@ DTAT -> Dtat
 
 [[Models]]
 
+	User.cs
 	Product.cs
 
-[[DAL, Dal, DataAccess, DataAccessLayer, Data]]
+[[Dal, DataAccess, DataAccessLayer, Data]]
 
 	DatabaseContext.cs
 **************************************************
@@ -82,11 +87,35 @@ DTAT -> Dtat
 
 [[Domain]]
 
+	User.cs
+	Product.cs
+
+[[Infrastructure]]
+
+	[Persistance]
+
+		DatabaseContext.cs
+**************************************************
+
+**************************************************
+[[EShop]]
+
+[[Domain]]
+
+	User.cs
 	Product.cs
 
 [[Persistance]]
 
 	DatabaseContext.cs
+**************************************************
+
+**************************************************
+**************************************************
+**************************************************
+*** Session 7 ************************************
+**************************************************
+**************************************************
 **************************************************
 
 **************************************************
@@ -217,39 +246,31 @@ Sample Model (Entity): Category
 **************************************************
 
 **************************************************
-namespace Models
-{
-	public class Category
-	{
-		/// <summary>
-		/// Primary Key -> Unique (منحصر به فرد)
-		/// </summary>
-		public int Id { get; set; }
-
-		public string Name { get; set; }
-	}
-}
-**************************************************
-
-**************************************************
-POCO -> Plain Old CLR Objects
-**************************************************
-namespace Models
-{
-	public class Category : BaseEntity
-	{
-		public string Name { get; set; }
-	}
-}
-**************************************************
-
-**************************************************
 Primary Constructor in .NET 8.x
 **************************************************
 namespace Models;
 
 public class Category(string name) : object()
 {
+	/// <summary>
+	/// Primary Key -> Unique (منحصر به فرد)
+	/// </summary>
+	public int Id { get; set; }
+
+	public string Name { get; set; } = name;
+}
+**************************************************
+
+**************************************************
+POCO -> Plain Old CLR Objects
+**************************************************
+namespace Models;
+
+public class Category(string name) : Entity()
+{
+	/// <summary>
+	/// Primary Key -> Unique (منحصر به فرد)
+	/// </summary>
 	public int Id { get; set; }
 
 	public string Name { get; set; } = name;
