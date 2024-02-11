@@ -1,18 +1,37 @@
 ﻿//using Microsoft.EntityFrameworkCore;
 
 //// **************************************************
-//using (var applicationDbContext = new ApplicationDbContext())
-//{
-//	var category =
-//		new Category
-//		{
-//			Name = "My Category",
-//		};
+//// دستورات ذیل را در درس قبل یاد گرفته‌ایم
+//// **************************************************
+//var applicationDbContext =
+//	new ApplicationDbContext();
 
-//	applicationDbContext.Categories.Add(entity: category);
+//var category =
+//	new Category
+//	{
+//		Name = "My Category 1",
+//	};
 
-//	applicationDbContext.SaveChanges();
-//}
+//applicationDbContext.Categories.Add(entity: category);
+
+//applicationDbContext.SaveChanges();
+
+//applicationDbContext.Dispose();
+//// **************************************************
+
+//// **************************************************
+////using (var applicationDbContext = new ApplicationDbContext())
+////{
+////	var category =
+////		new Category
+////		{
+////			Name = "My Category",
+////		};
+
+////	applicationDbContext.Categories.Add(entity: category);
+
+////	applicationDbContext.SaveChanges();
+////}
 //// **************************************************
 
 //// **************************************************
@@ -38,7 +57,7 @@
 ////		Name = "My Category",
 ////	};
 
-////// New
+////// New in EF Core
 ////applicationDbContext.Add(entity: category);
 
 ////applicationDbContext.SaveChanges();
